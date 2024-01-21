@@ -1,0 +1,35 @@
+Unicode: A Way to Store Every Symbol, Ever
+
+Enter Unicode, an encoding system that solves the space issue of ASCII. Like ASCII, Unicode assigns a unique code, called a code point, to each character. However, Unicode’s more sophisticated system can produce over a million code points, more than enough to account for every character in any language.
+
+Unicode is now the universal standard for encoding all human languages. And yes, it even includes emojis.
+
+Below are some examples of text characters and their matching code points. Each code point begins with “U” for “Unicode,” followed by a unique string of characters to represent the character.
+Character 	Code point
+A 	U+0041
+a 	U+0061
+0 	U+0030
+9 	U+0039
+! 	U+0021
+Ø 	U+00D8
+ڃ 	U+0683
+ಚ 	U+0C9A
+𠜎 	U+2070E
+😁 	U+1F601
+
+
+
+If you want to learn how code points are generated and what they mean in Unicode, check out this in-depth explanation.
+
+So, we now have a standardized way of representing every character used by every human language in a single library. This solves the issue of multiple labeling systems for different languages — any computer on Earth can use Unicode.
+
+But, Unicode alone doesnt store words in binary. Computers need a way to translate Unicode into binary so that its characters can be stored in text files. Heres where UTF-8 comes in.
+UTF-8: The Final Piece of the Puzzle
+
+UTF-8 is an encoding system for Unicode. It can translate any Unicode character to a matching unique binary string, and can also translate the binary string back to a Unicode character. This is the meaning of UTF, or Unicode Transformation Format.
+
+There are other encoding systems for Unicode besides UTF-8, but UTF-8 is unique because it represents characters in one-byte units. Remember that one byte consists of eight bits, hence the -8 in its name.
+
+More specifically, UTF-8 converts a code point (which represents a single character in Unicode) into a set of one to four bytes. The first 128 characters in the Unicode library — the characters we saw in ASCII — are represented as one byte. Characters that appear later in the Unicode library are encoded as two-byte, three-byte, and eventually four-byte binary units.
+
+Below is the same character table from above, with the UTF-8 output for each character added. Notice how some characters are represented as just one byte, while others use more.

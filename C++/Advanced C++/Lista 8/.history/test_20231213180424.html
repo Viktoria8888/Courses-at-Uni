@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+
+<html lang="pl">
+	<head>
+		<title>C++ i STL</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<a rel="shortcut icon" href="/~prz/img/uwr/favicon.ico" />
+
+		<!-- JQUERY -->
+		<script src="/~prz/frameworks/jquery-3.1.1/jquery-3.1.1.js"></script>
+
+		<!-- BOOTSTRAP -->
+		<a rel="stylesheet" href="/~prz/frameworks/bootstrap16-3.3.7/css/bootstrap.css" />
+		<script src="/~prz/frameworks/bootstrap16-3.3.7/js/bootstrap.js"></script>
+
+		<!-- LESS -->
+		<link rel="stylesheet/less" type="text/css" href="/~prz/resources2016/p_rz.less" />
+		<script src="/~prz/frameworks/less-2.7.2/dist/less.min.js" type="text/javascript"></script>
+
+		<!-- MATHJAX -->
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                jax: ["input/TeX", "output/HTML-CSS", "output/PreviewHTML"],
+                extensions: ["tex2jax.js", "fast-preview.js"],
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                    processEscapes: true
+                },
+                "fast-preview": {
+                    color: "inherit!important",
+                    updateTime: 30,
+                    updateDelay: 6,
+                    messageStyle: "none",
+                    disabled: false
+                },
+                "HTML-CSS": {
+                    availableFonts: ["TeX"],
+                    preferredFont: "TeX",
+                    webFont: "TeX",
+                    imageFont: ""
+                },
+                PreviewHTML: {
+                    linebreaks: {}
+                }
+            });
+            MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
+                var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
+                VARIANT["normal"].fonts.unshift("MathJax_SansSerif");
+                VARIANT["bold"].fonts.unshift("MathJax_SansSerif-bold");
+                VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
+                VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
+            });
+        </script>
+        <script type="text/javascript" async src="/~prz/frameworks/mathjax-2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
+
+		<!-- my own scripts -->
+		<script src="/~prz/resources2016/p_rz.js"></script>
+            	</head>
+	<body>
+		<!-- **************** nagłówek **************** -->
+		<header class="container-fluid">
+			<div class="row title">
+				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+					<div class="row text-center">
+						<div class="col-sm-12 col-xs-4">
+							<img src="/~prz/resources2016/img/prz/prz_100.jpg" class="img-circle" />
+						</div>
+						<div class="col-sm-12 col-xs-8">
+							<h3>Paweł Rzechonek</h3>
+                            <p class="visible-xs">
+                                Zainteresowania zawodowe: programowanie (C++, Java, C#, F#),
+                                technologie webowe, szeroko rozumiana algorytmika, metematyka klasyczna.
+                            </p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-10 col-md-9 col-sm-8 col-xs-12 text-center">
+					<div class="row text-center">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<h2>C++ i STL<br />zaawansowane techniki</h2>
+						</div>
+						<div class="col-lg-8 col-md-8 col-sm-8 hidden-xs">
+							<h4 class="text-center">Instytut Informatyki<br />Uniwersytetu Wrocławskiego</h4>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4 hidden-xs">
+							<p class="text-left">ul. Joliot-Curie 15<br />50-383 Wrocław<br />POLAND</p>
+						</div>
+					</div>
+				</div>
+			</div>
+        </header>
+
+		<!-- **************** menu **************** -->
+		<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#"><span class="czer">P</span><span class="nieb">Rz</span></a>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav">
+						<li><a href="#liter">literatura</a></li>
+						<li><a href="#labor">laboratorium</a></li>
+						<li><a href="#wykl">wykłady</a></li>
+						<li><a href="#przedm">o przedmiocie</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/~prz/index.html"><span class="glyphicon glyphicon-home"></span> powrót</a></li>
+					</ul>
+				</div>
+			</div>
+        </nav>
+
+		<!-- **************** treść **************** -->
+        <div class="container-fluid">
+			<div class="row">
+                <!-- **************** dopiski **************** -->
+				<div class="col-sm-4 col-xs-12 col-sm-push-8" style="padding-top: 16px; border-left: solid 4px #FF3366; border-top: solid 4px #FF3366;">
+					<div class="panel panel-info">
+                        <div class="panel-heading"><h6>data ostatniej modyfikacji</h6></div>
+                        <div class="panel-body">
+                            <p>
+                                <span class="glyphicon glyphicon-calendar"></span>
+                                Data ostatniej modyfikacji dokumentu (stl.phtml) to czwartek 7 grudnia 2023 roku (o godzinie 15:38).                            </p>
+                        </div>
+                    </div>
+					<div class="panel panel-danger">
+                        <div class="panel-heading"><h6>ogłoszenia</h6></div>
+                        <div class="panel-body">
+                            <dl>
+                                <!--dt>
+                                    7 stycznia 2021 r. <br />
+                                    lista XIII na laboratorium:
+                                </dt>
+                                <dd>
+                                    <script>ogloszenie(14, 1, 2021);</script>
+                                    Lista XIII będzie ostatnią listą zadań w tym semestrze.
+									Ostatecznie będzie więc 12 list laboratoryjnych (pomijając przeterminowaną listę XI).
+									Maksymalna liczba punktów do zdobycia za te zadania wyniesie 120,
+									progiem zaliczeniowym będzie ostatecznie 60 punktów.
+									Jeśli będą potrzebne zadania ratunkowe, to zostaną dopisane.
+                                </dd>
+                                <p></p>
+                                <dt>
+                                    2 stycznia 2023 r. <br />
+                                    lista IX na laboratorium:
+                                </dt>
+                                <dd>
+                                    <script>ogloszenie(10, 1, 2023);</script>
+                                    Termin realizacji zadań z listy IX przypada na 9 i 10 stycznia 2023.
+								</dd>
+                                <p></p>
+                                <dt>
+                                    18 października 2022 r. <br />
+                                    odwołane zajęcia:
+                                </dt>
+                                <dd>
+                                    <script>ogloszenie(25, 11, 2022);</script>
+                                    W tym tygodniu 17-21 października 2022 r. wszystkie zajęcia są odwołane
+									z powodu choroby wykładowcy - zwolnienie lekarskie.
+                                </dd>
+                                <p></p-->
+                                <dt>
+                                    5 października 2023 r. <br />
+                                    pierwsze laboratoria:
+                                </dt>
+                                <dd>
+                                    <script>ogloszenie(31, 10, 2023);</script>
+                                    Pierwszy wykład w tym semestrze odbędzie się 5 października 2023 r.
+                                    W pierwszym tygodniu nauki laboratoria nie odbywają się
+									- na laboratoriach spotykamy się
+                                    dopiero w następnym tygodniu 11 i 12 października 2023 r.
+                                </dd>
+                                <p></p>
+                                <dt>
+                                    5 października 2023 r. <br />
+                                    punkt informacyjny:
+                                </dt>
+                                <dd>
+                                    <script>ogloszenie(31, 10, 2023);</script>
+                                    W tym miejscu będą się pojawiać ważne ogłoszenia
+                                    dotyczące organizacji wszystkich zajęć związanych
+                                    z tym przedmiotem.
+                                    Proszę czytać te ogłosznia na bieżąco.
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+					<div class="panel panel-info">
+                        <div class="panel-heading"><h6>terminarz</h6></div>
+                        <div class="panel-body">
+                            <dl>
+                                <dt>wykład:</dt>
+                                <dd><span class="glyphicon glyphicon-edit"></span> czwartek 14-16, s.140 (Paweł Rzechonek)</dd>
+                                <p></p>
+                                <dt>laboratoria:</dt>
+                                <dd><span class="glyphicon glyphicon-modal-window"></span> środa 18-20, s.108 (Paweł Rzechonek)</dd>
+                                <dd><span class="glyphicon glyphicon-modal-window"></span> czwartek 16-18, s.109 (Paweł Rzechonek)</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    					<div class="panel panel-default">
+                        <div class="panel-heading"><h6>licznik wejść na stronę</h6></div>
+                        <div class="panel-body">
+                            <p>
+                                <span class="glyphicon glyphicon-share-alt"></span>
+                                    7 dzisiaj <br />
+                                <span class="glyphicon glyphicon-share-alt"></span>
+                                    141 w obecnym miesiącu <br />
+                                <span class="glyphicon glyphicon-share-alt"></span>
+                                    847 w bieżącym roku <br />
+                                <span class="glyphicon glyphicon-share-alt"></span>
+                                    847 od powstania strony
+                            </p>
+                        </div>
+                        <div class="panel-footer">
+                            <p>
+                                <span class="glyphicon glyphicon-calendar"></span>
+                                strona powstała <br /> 5 października 2023 roku
+                            </p>
+                        </div>
+                    </div>
+        		</div>
+                <!-- **************** artykuł **************** -->
+				<div class="col-sm-8 col-xs-12 col-sm-pull-4" style="border-top: solid 4px #FF3366;">
+					<a name="przedm"></a><h2>o przedmiocie</h2>
+                    <h5>Kurs C++23 i STL</h5>
+                    <p>
+                        <strong>C++23</strong> to najnowsza wersja języka C++.
+                        Język C++ prawdza się, gdy chcemy zapewnić wysoką wydajność programu.
+						Doskonale nadaje się do zastosowań systemowych, inżynierskich i algorytmicznych.
+                        Język ten jest stale rozwijany a kolejne jego specyfikacje,
+                        czyli <strong>C++11</strong>, <strong>C++14</strong>, <strong>C++17</strong>,
+						<strong>C++20</strong> i <strong>C++23</strong>, przyniosły wiele zmian i udogodnień.
+						W porównaniu z językiem <strong>C++98</strong> (standard z roku 1998) przeszedł on tak dużą
+						transformację, że można śmiało powiedzieć, że jest to nowy język programowania.
+                        Aby w pełni wykorzystać potencjał współczesnego języka C++ należy go używać wraz
+						z biblioteką standardową <strong>STL</strong>.
+                        C++ i STL to doskonałe narzędzie do zaimplementowania oprogramowania bardzo wysokiej jakości.
+                    </p>
+                    <h5>Wymagane przygotowanie</h5>
+                    <ul class="list-unstyled">
+                        <li><span class="glyphicon glyphicon-tag">&nbsp;</span> Umiejętność programowania strukturalnego i proceduralnego w języku C99.</li>
+                        <li><span class="glyphicon glyphicon-tag">&nbsp;</span> Znajomość podstaw programowania obiektowego w języku C++98.</li>
+                        <li><span class="glyphicon glyphicon-tag">&nbsp;</span> Umiejętność czytania dokumentacji technicznej w języku angielskim.</li>
+                        <li><span class="glyphicon glyphicon-tag">&nbsp;</span> Znajomość podstaw algorytmiki.</li>
+                    </ul>
+                    <h5>Cel kursu</h5>
+                    <ul class="list-unstyled">
+                        <li><span class="glyphicon glyphicon-tags">&nbsp;</span> Nauka nowoczesnych technik programowania w języku C++17/20.</li>
+                        <li><span class="glyphicon glyphicon-tags">&nbsp;</span> Poznanie obszernych fragmentów biblioteki standardowej STL.</li>
+                    </ul>
+
+					<a name="liter"></a><h2>literatura</h2>
+                    <h5>Podrędznik podstawowy</h5>
+                    <ul class="list-unstyled">
+                        <li><span class="glyphicon glyphicon-book">&nbsp;</span> N.M.Josuttis: <i>C++. Biblioteka standardowa. Podręcznik programisty. Wydanie 2.</i> Wydawnictwo Helion, Gliwice 2014.</li>
+                    </ul>
+                    <h5>Literatura uzupełniająca</h5>
+                    <ul class="list-unstyled">
+                        <li><span class="glyphicon glyphicon-book">&nbsp;</span> B.Stroustrup: <i>Język C++. Kompendium wiedzy. Wydanie 4.</i> Wydawnictwo Helion, Gliwice 2014.</li>
+                        <li><span class="glyphicon glyphicon-book">&nbsp;</span> J.Galowicz: <i>C++17 STL. Receptury.</i> Wydawnictwo Helion, Gliwice 2018.</li>
+                    </ul>
+                    <h5>Literatura dodatkowa</h5>
+                    <ul class="list-unstyled">
+                        <li><span class="glyphicon glyphicon-book">&nbsp;</span> J.Grębosz: <i>Opus magnum C++11. Programowanie w języku C++. Tom 1, 2, 3.</i> Wydawnictwo Helion, Gliwice 2018.</li>
+                       <li><span class="glyphicon glyphicon-book">&nbsp;</span> S.Rao: <i>C++. Dla każdego. Wydanie 7.</i> Wydawnictwo Helion, Gliwice 2014.</li>
+                        <li><span class="glyphicon glyphicon-book">&nbsp;</span> S.Prata: <i>Język C++. Szkoła programowania. Wydanie 6.</i> Wydawnictwo Helion, Gliwice 2012.</li>
+                    </ul>
+                    <h5>Literatura elektroniczna</h5>
+                    <ul class="list-unstyled">
+                        <li><span class="glyphicon glyphicon-send">&nbsp;</span> <a href="http://www.cplusplus.com/">cplusplus.com</a></li>
+                        <li><span class="glyphicon glyphicon-send">&nbsp;</span> <a href="http://www.cprogramming.com/tutorial/">cprogramming.com</a></li>
+                        <li><span class="glyphicon glyphicon-send">&nbsp;</span> <a href="http://en.cppreference.com/">cppreference.com</a></li>
+                        <li><span class="glyphicon glyphicon-send">&nbsp;</span> <a href="http://www.learncpp.com/">learncpp.com</a> - tutorials to help you master C++ and object-oriented programming</li>
+                        <li><span class="glyphicon glyphicon-send">&nbsp;</span> <a href="http://gcc.gnu.org/projects/cxx0x.html">gcc.gnu.org</a> - C++11 Support in GCC</li>
+                        <li><span class="glyphicon glyphicon-send">&nbsp;</span> <a href="http://pl.wikipedia.org/wiki/C%2B%2B11">C++11 (pl.wikipedia.org)</a></li>
+                    </ul>
+                    <h5>Kompilatory online C++17/C++20</h5>
+                    <ul class="list-unstyled">
+                        <li><span class="glyphicon glyphicon-cog">&nbsp;</span> <a href="https://www.onlinegdb.com/online_c++_compiler">OnlineGDB</a></li>
+                        <li><span class="glyphicon glyphicon-cog">&nbsp;</span> <a href="https://wandbox.org/">Wandbox</a></li>
+                        <li><span class="glyphicon glyphicon-cog">&nbsp;</span> <a href="https://replit.com/languages/cpp">replit</a></li>
+                    </ul>
+
+					<a name="labor"></a><h2>laboratorium</h2>
+                    <h5>Zasady zaliczenia przedmiotu</h5>
+                    <dl>
+                        <dt><span class="glyphicon glyphicon-triangle-right"></span> Ogólnie:</dt>
+                        <dd>
+                            W semestrze będzie opublikowanych (na tej stronie) kilkanaście list
+							z zadaniami do zaprogramowania.
+							Na każdej liście znajdą się zadania za sumaryczną ilość 10 punktów
+							(mogą zdarzyć się wyjątki od tej reguły).
+                            Zatem za samodzielnie zaprogramowane zadania z listy i oddane w terminie można
+							będzie dostać do 10 punktów (chociaż listy z zadaniami mogą różnić się trudnością).
+                        </dd>
+                        <dt><span class="glyphicon glyphicon-triangle-right"></span> Terminy:</dt>
+                        <dd>
+                            Zadania do zaprogramowania będą ogłaszane w tygodniu poprzedzającym termin ich realizacji.
+                            Zadania należy oddawać w wyznaczonym terminie w trakcie trwania pracowni.
+                            Spóźnienia nie będą tolerowane, za wyjątkiem uzasadnionych sytuacji życiowych:
+                            choroba potwierdzona zwolnieniem lekarskim, wezwanie do Sądu, itp.
+                        </dd>
+                        <dt><span class="glyphicon glyphicon-triangle-right"></span> Prezentacje:</dt>
+                        <dd>
+                            Programy należy prezentować osobiście w czasie pracowni - z każdym studentem
+                            chciałbym indywidualnie omówić jego rozwiązanie oraz wskazać wady i braki w programie.
+                            Po pracowni program należy mi przekazać (będę jeszcze robić weryfikację antyplagiatową) na SKOS.
+                            W trakcie prezentacji programu trzeba się liczyć z pytamiami dotyczącymi zadania:
+                            metoda rozwiązania, zastosowane konstrukcje językowe, wykorzystane technologie czy klasy biblioteczne itp.
+                        </dd>
+                        <dt><span class="glyphicon glyphicon-triangle-right"></span> Rozwiązania:</dt>
+                        <dd>
+                            Kody źródłowe własnych programów należy zapisywać na <a href="https://skos.ii.uni.wroc.pl/">SKOS</a>,
+                            ponieważ tylko wtedy rozwiązania zadań będą podlegały weryfikacji autorskiej i ocenie.
+                            Jeśli student nie mógł uczestniczyć w zajęciach z powodu awarii połączenia internetowego,
+                            to oprócz programu ma przekazać sprawozdanie z realizacji zadania (co zostało zaprogramowane
+                            i w którym miejścu w pliku źródłowym oraz czego nie udało się osiągnąć).
+                        </dd>
+                        <dt><span class="glyphicon glyphicon-triangle-right"></span> Oceny:</dt>
+                        <dd>
+                            Aby zaliczyć laboratorium na ocenę dostateczną trzeba do końca
+                            semestru zdobyć 50% z wszystkich możliwych do uzyskania punktów;
+                            na ocenę bardzo dobrą trzeba będzie zgromadzić 90% punktów;
+                            oceny pośrednie pozostją w liniowej zależności od przedstawionych wymagań granicznych.
+                        </dd>
+                    </dl>
+                    <h5>Zadania laboratoryjne</h5>
+                    <ol type="I">
+                        <li><a href="#zad1" class="btn" data-toggle="collapse"><strong>11, 12 października 2023: nowe elementy języka C++</strong></a></li>
+						<div id="zad1" class="collapse">
+							<dl>
+								<dt>Zadanie 1 (1 pkt).</dt>
+								<dd>
+								    Sprawdź, czy w stosowanym przez Ciebie kompilatorze (co najmniej C++17) działają trójznaki
+									(ang. trigraphs), takie jak na przykład <code>??-</code> co tłumaczy się na znak tyldy
+									<code>&tilde;</code>, itp.
+								    Co zrobić, aby kompilator właściwie zinterpretował występujące w programie trójznaki?
+							    </dd>
+								<dt>Zadanie 2 (1 pkt).</dt>
+								<dd>
+								    Wypisz na standardowym wyjściu <code>std::out</code> surowy łańcuch znaków
+									(ang. raw string) zawierający:
+									<ol>
+										<li>adres naszego Instytutu (w pierwszej linii pełną nazwę Instytutu, w drugiej ulicę
+											z numerem, w trzeciej kod pocztowy i miasto);</li>
+								    	<li>ścieżkę bezwzględną do katalogu z programami użytkowymi w systemie Windows;</li>
+								    	<li>różne sekwencje znaków cudzysłowia i nawiasów okrągłych (a w szczególności
+										sekwencję <code>)&quot;</code>).</li>
+									</ol>
+							    </dd>
+								<dt>Zadanie 3 (1 pkt).</dt>
+								<dd>
+								    Stwórz alias dla typu będącego zbiorem <code>std::unordered_set&lt;&gt;</code>
+									łańcuchów znakowych.
+								    Następnie zadeklaruj i zainicjalizuj taki zbiór używając jednolitej inicjalizacji.
+								    Na koniec przejdź po tym zbiorze pętlą <em>for</em> dla zakresów (ang. range-based
+									<em>for-each</em> loop)) dedukując automatycznie typ elementów zbioru; wypisz w pętli
+									wszystkie łańcuchy na standardowym wyjściu <code>std::cout</code>).
+							    </dd>
+								<dt>Zadanie 4 (1 pkt).</dt>
+								<dd>
+								    Zdefiniuj silnie stypizowany typ wyliczeniowy dla kilku wybranych imion męskich i żeńskich,
+									którego elementy będa typu <code>uint_16</code>.
+								    Następnie zdefiniuj funkcję, która jako argumenty przyjmuje komunikat typu
+									<code>string</code> i imię odbiorcy zdefiniowanego wcześniej typu wyliczeniowego (funkcja
+									może wypisywać komunikat personalnie skierowany do wskazanej osoby używając instrukcji
+									<em>switch-case</em>).
+							    </dd>
+								<dt>Zadanie 5 (2 pkt).</dt>
+								<dd>
+								    Zdefiniuj funkcję rekurencyjną, która będzie wyznaczała <em>n</em>-tą liczbę Lucasa.
+								    Funkcja ta ma przyjmować argument typu <code>uint64_t</code> i powinna automatycznie
+									dedukować typ wyniku.
+							    </dd>
+								<dt>Zadanie 6 (1 pkt).</dt>
+								<dd>
+								    Napisz program, który dla podanych współczynników równania kwadratowego wyliczy wyróżnik
+									tego równania (często oznaczany symbolem &Delta;) i w zależności od jego wartości wypisze
+									miejsca zerowe.
+								    Użyj do tego celu instrukcji warunkowej <em>if-else</em> z lokalnym inicjalizatorem dla
+									wyróżnika.
+							    </dd>
+								<dt>Zadanie 7 (1 pkt).</dt>
+								<dd>
+								    Napisz program, który dla podanej jako łańcuch znakowy daty w postaci cyfrowej
+									wypisze ją w postaci naturalnej z nazwą miesiąca (na przykład datę <code>5.10.2023</code>
+									należy wypisać w postaci <code>5 października 2023</code>).
+								    Użyj do tego celu instrukcji wyboru <em>switch-case</em> z lokalnym inicjalizatorem
+									przynajmniej dla miesiąca w dacie.
+							    </dd>
+								<dt>Zadanie 8 (2 pkt).</dt>
+								<dd>
+								    Napisz program, który posortuje ciąg rekordów opisujących osoby
+									<code>deque&lt;osoba&gt;</code>.
+									Sortowanie przeprowadź według nazwisk, imion i wieku (rok urodzenia).
+									Wykorzystaj do tego zaprzyjaźniony z klasą <code>osoba</code> operator
+									porównywania pary osób (porównywanie leksykograficzne tupli zawierających
+									nazwisko, imię i rok urodzenia generowanych funkcją <code>tie</code>).
+								</dd>
+								<!--dt>Zadanie 9 (2 pkt).</dt>
+								<dd>
+									Dany jest wektor zawierający uporządkowany ciąg liczb całkowitych
+									<code>vector&lt;int&gt;</code>; dane w tym wektorze są uporządkowane niemalejąco;
+									wiemy też, że w ciągu tym niektóre wartości moga się wielokrotnie powtarzać
+									(na przykład: 1, 2, 3, 3, 4, 5, 5, 5, 6, 7, 7, 7, 7, 8, 9).
+									Wykorzystaj operator statku kosmicznego <code>&lt;=&gt;</code> do zaprogramowania
+									algorytmu (wyszukiwanie binarne) wyznaczającego parę iteratorów reprezentujących
+									zakres zawierający zadaną wartość.
+									Wynikiem tej funkcji ma być para iteratorów; wykorzystaj mechanizm wiązania
+									strukturalnego do przypisana wyznaczonych iteratorów do pary zmiennych
+									<code>poczatek</code> oraz <code>koniec</code>.
+								</dd-->
+							</dl>
+						</div>
+
+                        <li><a href="#zad2" class="btn" data-toggle="collapse"><strong>18, 19 października 2023: inteligentne wskaźniki</strong></a></li>
+						<div id="zad2" class="collapse">
+							<dl>
+								<dt>Zadanie 1 (3 pkt).</dt>
+								<dd>
+								    Zdefiniuj prostą klasę zawierającą licznik typu <code>uint64_t</code>,
+									początkowo ustawiony na wartość 1.
+								    W kasie tej, oprócz innych funkcjonalności, umieść wirtualny destruktor,
+									który wypisze komunikat ze stanem licznika na standardowym wyjściu
+									diagnostycznym <code>cerr</code>.
+							    </dd>
+								<dd>
+								    Następnie stwórz <em>n</em>-elementową tablicę takich liczników
+									i opakuj ją wskaźnikiem <code>unique_ptr</code> (opakowanie ma dotyczyć
+									tablicy a nie pojedynczch liczników).
+							    </dd>
+								<dd>
+								    Napisz też funkcję, która wywoła się rekurencyjnie <em>m</em> razy
+									z argumentem będącym wskaźnikiem (nie chodzi o referencję na wskaźnik)
+									na taką tablicę (wskaźnik <code>unique_ptr</code> ustaw za pomocą przniesienia).
+								    W <em>i</em>-tym wywołaniu funkcja ta ma zwiększyć 10% losowo wybranych
+									elementów o wartość <em>i</em>.
+								</dd>
+								<dd>
+							        W programie głównym wywołaj tą funkcję, a po jej wywołaniu wypisz wartości
+									wszystkich <em>n</em> liczników umieszczonych w tablicy.
+							        Parametry <em>n</em> i <em>m</em> należy ustalić w programie arbitralnie
+									(na przykład <em>n = 40</em> i <em>m = 20</em>).
+							    </dd>
+								<dt>Zadanie 2 (3 pkt).</dt>
+								<dd>
+								    Zdefiniuj klasę opakowującą plik tekstowy <code>line_writer</code>.
+								    Obiekt takiej klasy ma przetrzymywać wskaźnik/referencję do strumienia
+									plikowego <code>ofstream</code> stworzonego i otwartego w konstruktorze.
+								    Zadaniem obiektów tej klasy będzie pisanie do pliku wiersz po wierszu.
+								    Klasa ta powinna zamykać strumień w destruktorze.
+							    </dd>
+								<dd>
+								    W programie głównym stwórz kilka wskaźników <code>shared_ptr</code>
+									odnoszących się do tego samego obiektu plikowego.
+								    Niech każdy fragment programu posiadający taki własny wskaźnik zapisze
+									w tym pliku swoje dane.
+								    Plik powinien zostać zamknięty dopiero, gdy wszystkie sprytne wskaźniki
+									zostaną zlikwidowane.
+								</dd>
+								<dt>Zadanie 3 (4 pkt).</dt>
+								<dd>
+									Zdefiniuj klasę <code>llama</code> reprezentującą pojedynczą lamę
+									w stadzie lam (zarówno w konstruktorze jak i w destruktorze wypisuj
+									spersonalizowane komunikaty dotyczące lamy).
+									W obiekcie tym powinno być zapisane imię lamy typu <code>string</code>
+									(imiona niech będą unikatowe w stadzie), jej płeć jako typ wyliczeniowy,
+									wskaźnik na ojca i matkę typu <code>shared_ptr&lt;llama&gt;</code>
+								    (dopuszczamy przypadek nieznanego ojca lub matki oznaczonego za pomocą
+									<code>noname</code>) oraz wskaźnik na kolekcję jej dzieci typu
+									<code>vector&lt;weak_ptr&lt;llama&gt;&gt;</code>.
+								</dd>
+								<dd>
+									Stado lam niech będzie kolekcją obiektów typu <code>llama</code>
+									- można opakować jakąś popularną kolekcję standardową, na przykład
+									<code>set&lt;llama&gt;</code> (porównywanie lam względem imion).
+									Przeprowadź symulację życia lam w stadzie: hodowca może dokupić lamę
+									z innego stada (wtedy jej rodzice są nieznani), lama może się urodzić
+									w stadzie (wtedy jej rodzice są członkami stada, a przynajmniej matka)
+									i wreszcie lama może zostać sprzedana (należy ją wtedy
+									usunąć z kolekcji).
+									Zaobserwuj, co się stanie, gdy słaby wskaźnik <code>weak_ptr</code>
+									stanie się wskaźnikiem wiszącym (po zwolnieniu zasobu przez wskaźnik
+									macierzysty <code>shared_ptr</code>).
+								</dd>
+							</dl>
+						</div>
+
+                        <li><a href="#zad3" class="btn" data-toggle="collapse"><strong>25, 26 listopada 2023: czasomierze</strong></a></li>
+						<div id="zad3" class="collapse">
+							<dl>
+								<dt>Zadanie 1 (1 pkt).</dt>
+								<dd>
+								    Wypisz najmniejszą i największą wartość jaką można zapisać w typie <code>long long int</code>.
+								    Na ilu bitach jest ta liczba zapisywana i ile to będzie cyfr dziesiętnych?
+								</dd>
+								<dt>Zadanie 2 (1 pkt).</dt>
+								<dd>
+								    Jaka jest najbliższa 0 liczba dodatnia dla typów <code>float</code> i <code>double</code>?
+								    Jakie są maksymalne wartości zapisywane w tych typach?
+								    Jaka jest różnica pomiędzy 1 a najmniejszą liczbą &gt;1 w tych typach?
+								</dd>
+								<dt>Zadanie 3 (2 pkt).</dt>
+								<dd>
+								    Zdefiniuj początkowe liczby harmoniczne posługując się statyczną arytmetyką liczb wymiernych
+								    z wykorzystaniem szablonu <code>ratio&lt;&gt;</code>.
+								    Jaką największą liczbę harmoniczną udało Ci się zdefiniować?
+								</dd>
+								<dt>Zadanie 4 (3 pkt).</dt>
+								<dd>
+								    Zdefinuj szablon funkcji, która przeniesie wartość ze wskazanego obiektu do innego obiektu.
+								    Uwzględnij dwa aspekty: po pierwsze obiekt źródłowy może być zadany przez wartość/referencję
+								    albo przez wskaźnik (rozróżnij te dwa przypadki za pomocą cechy typowej <code>is_pointer&lt;&gt;</code>),
+								    a po drugie obiekt docelowy ma być wskazany przez referencję niekoniecznie tego samego typu
+								    (ustal możliwość konwersji za pomocą cechy typowej <code>is_convertible&lt;&gt;</code>).
+								</dd>
+								<dt>Zadanie 5 (3 pkt).</dt>
+								<dd>
+								    Stwórz macierze o rozmiarach odpowiednio 10&times;10, 100&times;100 i 1000&times;1000
+								    i wypełnij je losowymi wartościami z zakrsu od 0.5 do 2.0.
+								    Następnie podnieś do kwadratu każdą z tych macierzy mierząc czas wykonania tych operacji.
+								    Pomiar czasu wykonaj za pomocą funkcji <code>now()</code> zegara <code>high_resolution_clock</code>.
+								    Dla małych macierzy powtórz operację wielokrotnie a potem zmierzony czas podziel przez tą wielokrotność.
+								</dd>
+							</dl>
+						</div>
+
+                        <li><a href="#zad4" class="btn" data-toggle="collapse"><strong>8, 9 listopada 2023: funktory</strong></a></li>
+						<div id="zad4" class="collapse">
+							<dl>
+					            <dt>Zadanie 1 (2 pkt).</dt>
+								<dd>
+									Zaimplementuj funktor <code>compose_f_gx_hx</code> realizujący złożenie dwuargumentowe
+									<em>f(g(x), h(x))</em>.
+									Podaj przykład jego użycia.
+								</dd>
+					            <dt>Zadanie 2 (2 pkt).</dt>
+								<dd>
+									Zaimplementuj funktor do składania funkcji poprzez wykonywanie ich po kolei.
+									Funkcja <code>po_kolei(f1, f2)(x)</code> powinna wykonać najpierw <code>f1(x)</code>
+									a potem <code>f2(x)</code>.
+									Wartości zwracane przez te funkcje mają być ignorowane.
+									Funkcja <code>po_kolei()</code> powinna zwracać taki funktor, aby możliwe było dalsze składanie,
+									na przykład <code>po_kolei(po_kolei(f1, f2), f3)(x)</code>.
+									Podaj przykład jego użycia.
+								</dd>
+					            <dt>Zadanie 3 (5 pkt).</dt>
+								<dd>
+									Stwórz w swoim programie trzy zbiory danych różnego typu <code>vector&lt;double&gt;</code>,
+									<code>list&lt;string&gt;</code> i <code>set&lt;int&gt;</code>.
+									Wypełnij te kontenery przypadkowymi wartościami (możesz losować albo arbitralnie coś wpisać).
+									Następnie na zbiorach tych wykonaj pewne obliczenia z użyciem zdefiniowanych przez ciebie funktorów:
+									<ol style="list-style-type: lower-alpha;">
+										<li>
+											Wypisz wszystkie wartości z zadanego zakresu (większe od <em>a</em> i mniejsze od <em>b</em>).
+										</li>
+										<li>
+											Wypisz co <em>k</em>-tą wartość zaczynając od pozycji <em>p</em>-tej.
+										</li>
+										<li>
+											Wyznacz średnią arytmetyczną (dotyczy kolekcji z liczbami).
+										</li>
+										<li>
+											Wyznacz element minimalny i maksymalny (zwróć parę wartości).
+										</li>
+										<li>
+											Wyznacz sumę (albo konkatenację dla łańcuchów znakowych) wszystkich elementów.
+										</li>
+									</ol>
+									Do każdego zadania zdefiniuj obiekt funkcyjny (ze stanem wewnętrznym) i użyj go w pętli <em>for-each</em>.
+									Programując to zadanie nie wolno korzystać z funkcji <code>accumulate()</code> ani innych podobnych.
+								</dd>
+					            <dt>Zadanie 4 (1 pkt).</dt>
+								<dd>
+									Zdefiniuj rekurencyjną lambdę do wyliczenia współczynnika dwumianowego (n po k)
+									tylko dla naturalnych wartości n i k.
+									Następnie przetestuj tą lambdę na kilku niedużych wartościach
+									umieszczonych w kolekcji par <code>vector&lt;pair&lt;int,int&gt;&gt;</code>
+									(umieść tam na ostatniej pozycji parę z jakąś liczbą ujemną).
+								</dd>
+							</dl>
+						</div>
+
+                        <li><a href="#zad5" class="btn" data-toggle="collapse"><strong>22, 16 listopada 2023: kolekcje</strong></a></li>
+						<div id="zad5" class="collapse">
+							<dl>
+								<dt>Zadanie 1 (4 pkt).</dt>
+								<dd>
+								    Zaprogramuj algorytm <em>stacji rozrządowej Dijkstry</em>, który przekształca wyrażenie arytmetyczne
+								    z postaci infiksowej z nawiasami do postaci postfiksowej bez nawiasów (Odwrotna Notacja Polska).
+								    Wykorzystaj do tego celu kolekcje standardowe.
+							    </dd>
+								<dd>
+									W pierwszym kroku należy przekształcić wyrażenie infiksowe zapisane w łańcuchu znakowym <code>string</code>
+									na ciąg symboli i umieścić je w kolekcji <code>forward_list&lt;symbol&gt;</code>.
+								</dd>
+								<dd>
+									Sama klasa <code>symbol</code> ma być tuplą kilku elementów: pierwszy to wartość wyliczeniowa opisująca
+									rodzaj symbolu (wyliczenie zdefiniuj za pomocą <code>enum class</code>), drugi to opcjonalna wartość
+									liczbowa typu <code>double</code> związana z symbolem (dla zwykłych literałów liczbowych albo dla
+									zdefiniowanych stałych jak <em>&pi;</em> czy <em>e</em>) a trzeci to opcjonalna nazwa typu
+									<code>string</code> (dla stałych, zmiennych oraz dla funkcji i działań arytmetycznych),
+									potrzebny będzie także element typu <code>int</code> do przechowywania priorytetów działań i funkcji.
+									Zmienne przechowuj w nieuporządkowanej kolekcji par <code>unordered_set&lt;pair&lt;string,
+									double&gt;&gt;</code>.
+								</dd>
+								<dd>
+									Funkcja przekształcająca zapis infiksowy wyrażenia na postać postfiksową dostaje jako argument
+									<code>forward_list&lt;symbol&gt;</code> (wyrażenie w zapisie infiksowym) i zwraca jako wynik także
+									<code>forward_list&lt;symbol&gt;</code> (wyrażenie w zapisie postfiksowym).
+								    Zaprogramuj <em>algorytm stacji rozrządowej Dijkstry</em> do tego przekształcenia, wykorzystując stos
+									symboli <code>stack&lt;symbol&gt;</code>.
+							    </dd>
+								<!--
+								<dt>Zadanie 2 (4 pkt).</dt>
+								<dd>
+								    Zdefiniuj strukturę danych do przetrzymywania <em>automatu skończonego</em> wraz z jego stanami, funkcjami przejść itd.
+								    Wykorzystaj do tego celu kolekcje standardowe.
+							    </dd>
+								<dd>
+								    W programie głównym zdefiniuj dwa proste automaty skończone:
+									<ol style="list-style-type: lower-alpha;">
+										<li>
+											automat sprawdzający, czy liczba binarna (alfabet złożony z cyfr dwójkowych: 0, 1) ma taki zapis,
+											że pomiędzy każdymi kolejnymi jedynkami występuje co najmniej jedno zero;
+										</li>
+										<li>
+											automat sprawdzający, czy liczba dziesiętna (alfabet złożony z cyfr dziesiętnych: 0, 1, ..., 9)
+											jest podzielna przez 3.
+										</li>
+									</ol>
+									Przetestuj działanie tych automatów na ciągach cyfr przekazanych do programu przez argumenty wywołania.
+							    </dd>
+								-->
+								<dt>Zadanie 2 (6 pkt).</dt>
+								<dd>
+								    Zdefiniuj strukturę danych do przetrzymywania <em>ważonego grafu dynamicznego</em> w postaci list sąsiadów.
+								    Wspomniana dynamika grafu oznacza, że można dodawać nowe a także usuwać istniejące wierzchołki z grafu.
+									Wierzchołki w grafie niech posiadają swoje unikalne identyfikatory typu <code>string</code> (identyfikator
+									nie może być pusty).
+								    Co się tyczy krawędzi, krawędzie można dodawać i usuwać, a także zmieniać ich wagę.
+									Każda krawędź w grafie ma przypisaną wagę typu <code>double</code> (wagi mogą być ujemne).
+								    Wykorzystaj do tego celu kontenery z STL.
+							    </dd>
+								<dd>
+									Dodatkowo zdefiniuj funkcję, która wyznaczy MST (minimalne drzewo rozpinające) w zadanym grafie.
+									Wynikiem działania tej funkcji także ma być graf (będący drzewem).
+							        Zaprogramuj <em>algorytm Prima</em> do tego celu, wykorzystując kolejkę priorytetową wierzchołków
+									osiągalnych ze zbudowanego do danego momentu MST.
+							    </dd>
+							</dl>
+						</div>
+
+                        <li><a href="#zad6" class="btn" data-toggle="collapse"><strong>23, 29 listopada 2023: iteratory i algorytmy</strong></a></li>
+						<div id="zad6" class="collapse">
+							<dl>
+								<dt>Zadanie 1 (3 pkt).</dt>
+								<dd>
+								    Pojedyncza osoba jest opisana za pomocą imienia, nazwiska, wieku, wagi i wzrostu
+									(zdefiniuj klasę reprezentującą osobę <code>person</code>).
+									Dane o 12 osobach umieść w deku <code>deque&lt;person&gt;</code>.
+									Wykonaj po kolei następujące czynności:
+									<ol style="list-style-type: lower-alpha;">
+										<li>posortuj osoby według współczynnika BMI (funkcją porównującą niech będzie lambda);
+											posortowaną grupę osób wypisz na standardowym wyjściu;</li>
+										<li>osoby odchudziły się na obozie sportowym i straciły 10% swojej pierwotnej wagi
+											(funkcją modyfikującą niech będzie lambda);
+											zmodyfikowaną grupę osób wypisz na standardowym wyjściu;</li>
+										<li>podziel osoby na dwie grupy: ciężkie z wagą powyżej 100[kg] i lekkie z wagą
+											nie większą niż 100[kg] (użyj lambdy jako predykatu);
+											wypisz grupę osób po podziale na standardowym wyjściu;</li>
+										<li>ustaw osobę o środkowym w tej populacji wzroście na pozycji 5 (pośrodku listy);
+											wypisz grupę osób po takiej modyfikacji na standardowym wyjściu;</li>
+										<li>losowo poprzestawiaj między sobą pierwsze 5 osób a potem ostatnie 5 osób;
+											wypisz grupę osób po takiej modyfikacji na standardowym wyjściu;</li>
+										<li>wypisz osobę najstarszą i najmłodszą na standardowym wyjściu
+											(nie korzystaj z sortowania danych).</li>
+									</ol>
+								</dd>
+								<dt>Zadanie 2 (2 pkt).</dt>
+								<dd>
+								    Pojedynczy punkt jest opisany za pomocą współrzędnych, koloru w postaci RGB i nazwy
+									(zdefiniuj klasę reprezentującą punkt <code>point</code>).
+								    Dane o 23 kolorowych punktach na płaszczyźnie umieść w liście <code>list&lt;point&gt;</code>.
+								    Wykonaj po kolei następujące czynności:
+									<ol style="list-style-type: lower-alpha;">
+										<li>usuń z listy wszystkie punkty, których nazwy są dłuższe niż 5 znaków;
+											wypisz pozostałe na liście punkty;</li>
+										<li>policz ile jest punktów leżących w I, II, III i IV ćwiartce układu współrzędnych;</li>
+										<li>posortuj punkty ze względu na ich jasność (luminancja koloru RGB jest określona wzorem
+											0.3&sdot;R + 0.59&sdot;G + 0.11&sdot;B); wypisz punkty po posortowaniu;</li>
+										<li>policz ile jest ciemnych punktów, dla których luminancja ma wartość poniżej 64;
+											przenieś te punkty do innej listy i wypisz je.</li>
+									</ol>
+								</dd>
+								<dt>Zadanie 3 (2 pkt).</dt>
+								<dd>
+								    Napisz funkcję, która zwróci najczęściej pojawiający się element w zbiorze danych oraz liczbę jego wystąpień.
+									Dane to liczby całkowite umieszczone w wektorze <code>vector&lt;int&gt;</code>, które lubią się powtarzać.
+									Jeśli więcej niż jeden element pojawia się pojawia się taką samą maksymalną liczbę razy,
+									to funkcja powinna zwrócić wszystkie je wszystkie - na przykład dla danych {1, 1, 3, 5, 8, 9, 5, 8, 8, 5}
+									powinny zostać zwrócone dwie pary {5, 3} oraz {8, 3} (pierwsza pozycja w parze to wartość a druga to liczba wystąpień).
+								</dd>
+								<dt>Zadanie 4 (2 pkt).</dt>
+								<dd>
+								    Napisz program, który oblicza i wyświetla histogram zawierający częstość występowania liter alfabetu angielskiego
+									(bez rozróżniania małych i dużych liter) w zadanym tekście.
+									Tekst pobierz z pliku tekstowego, którego nazwę przekażesz do programu poprzez argumenty wywołania.
+									Częstość występowania danej litery jest zdefiniowana jako proporcja liczby wystąpień tej litery
+									w stosunku do wszystkich liter w tekście (częstość musi być określona na podstawie liczby liter a nie rozmiaru tekstu).
+									Wykorzystaj w swoim programie iterator strumieniowy.
+								</dd>
+								<dt>Zadanie 5 (1 pkt).</dt>
+								<dd>
+								    Napisz funkcję, która wygeneruje wszystkie możliwe permutacje zadanego napisu typu <code>string</code>.
+								</dd>
+							</dl>
+						</div>
+
+                        <li><a href="#zad7" class="btn" data-toggle="collapse"><strong>6, 7 grudnia 2023: komponenty numeryczne</strong></a></li>
+						<div id="zad7" class="collapse">
+							<dl>
+								<!--dt>Zadanie 1 (1 pkt).</dt>
+								<dd>
+								    Zdefiniuj szablon funkcji, która losowo spermutuje zadaną tablicę obiektów.
+								    Każda permutacja ma być jednakowo prawdopodobna.
+							    </dd>
+								<dd>
+								    Uwaga: funkcję permutującą zdefiniuj samodzielnie, nie korzystaj z algorytmu <code>shuffle()</code>.
+							    </dd-->
+								<dt>Zadanie 1 (1 pkt).</dt>
+								<dd>
+								    Zdefiniuj własny rozkład prawdopodobieństwa, który będzie losował liczby z zadanego przedziału:
+									liczby całkowite ze zbioru {a, ..., b-1} albo liczby rzeczywiste z przedziału [a, b).
+									Liczby ze środka przedziału powinny się pojawiać rzadko a liczby zbliżone do brzegów zadanego przedziału często.
+								</dd>
+								<dd>
+								    Uwaga: można wykorzystać rozkład <code>uniform_int_distribution&lt;&gt;</code> oraz <code>uniform_real_distribution&lt;&gt;</code>
+									ale należy samodzielnie przekształcić otrzymane wartości tak, aby spełniały warunki zadania.
+							    </dd>
+								<dt>Zadanie 2 (2 pkt).</dt>
+								<dd>
+								    Napisz program, który wygeneruje 1000 losowych liczb z rozkładem:
+							        <ol style="list-style-type: lower-alpha;">
+							            <li>jednostajnym, używając <code>uniform_real_distribution</code>;</li>
+							            <li>dwumianowym, używając <code>binomial_distribution</code>;</li>
+							            <li>normalnym, używając <code>normal_distribution</code>.</li>
+							        </ol>
+							        Wygenerowane liczby zapisz w pliku <tt>.csv</tt> (dla każdego rozkładu w osobnym pliku).
+							        Zrób w arkuszu kalkulacyjnym wykresy dla danych wygenerowanych w taki sposób,
+							        aby sprawdzić poprawność zastosowanego rozkładu prawdopodobieństwa.
+							    </dd>
+							    <dd>
+							        Z formatem pliku CSV można się zapoznać na przykład na Wikipedii:
+							        <br /> &nbsp; &nbsp; &nbsp; <em>https://pl.wikipedia.org/wiki/CSV_(format_pliku)</em>
+							        <br /> &nbsp; &nbsp; &nbsp; <em>https://en.wikipedia.org/wiki/Comma-separated_values</em>
+							    </dd>
+								<dt>Zadanie 3 (2 pkt).</dt>
+								<dd>
+								    Napisz program, który wygeneruje losowy tekst złożony tylko z małych
+									liter alfabetu angielskiego i spacji (bez znaków interpunkcyjnych).
+									Długość tekstu oraz nazwę pliku <tt>.txt</tt> do zapisania tekstu przekaż poprzez
+									argumenty wywołania progamu.
+									Litery w tym tekście mają się pojawiać z częstotliwością zgodną ze statystyką podaną w
+									<a href="http://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html">tabelce</a>
+									(rozkład taki musisz więc samodzielnie zaprogramować).
+									Kolejne słowa w tekście mają być oddzielone pojedynczymi spacjami.
+									Każde słowo ma mieć losową długość z zakresu od 1 do 12 liter a długości te
+									mają być wybierane zgodnie z rozkładem dwumianowym.
+							    </dd>
+								<dt>Zadanie 4 (2 pkt).</dt>
+								<dd>
+								    Zdefiniuj funkcje pracujące na liczbach zespolonych, które będą wyliczać wartość:
+							        <ol style="list-style-type: lower-alpha;">
+							            <li>funkcji gamma Eulera $\Gamma(z) = \frac{1}{z} \prod_{n=1}^{\infty}
+							                \frac{(1+\frac{1}{n})^z}{1+\frac{z}{n}}$</li>
+										<li>i odwrotności tej funkcji $\frac{1}{\Gamma(z)} = ze^{\gamma z} \prod_{n=1}^{\infty}
+										    \left(\left(1+\frac{z}{n}\right)e^{-\frac{z}{n}}\right)$.</li>
+									</ol>
+									Symbol $\gamma$ reprezentuje stałą Eulera-Mascheroniego wynoszącą około 0.5772156649.
+									Funkcje te mają liczyć wartość funkcji w zadanym punkcie zespolonym z określoną dokładnością
+									(liczba iteracji).
+								</dd>
+								<dt>Zadanie 5 (3 pkt).</dt>
+								<dd>
+								    Zdefiniuj funkcję pracującą na liczbach zespolonych, która będzie wyliczać wartość
+									funkcji dzeta Riemanna $\zeta(z) = \sum_{n = 1}^{\infty} \left(\frac{1}{n}\right)^z$.
+									Szereg ten jest zbieżny dla takich $z$, których część rzeczywista jest $ Re\,(z) \gt 1$.
+									Funkcja ta ma liczyć wartość funkcji w zadanym punkcie zespolonym z określoną dokładnością
+									(liczba iteracji).
+							    </dd>
+							    <dd>
+									Policz i stablicuj wartości tej funkcji na <em>prostej krytycznej</em> z hipotezy Riemanna,
+									gdzie część rzeczywista jest $Re\,(z) = 0.5$.
+									Stablicuj dane z przedziału od -30 do 30 ze skokiem co najmniej 0.1.
+							    	Musisz użyć wzoru zbieżnego dla liczb zespolonych, w których część rzeczywista jest
+									z zakresu $0 \lt Re\,(z) \lt 1$, czyli: $\zeta(z) = \frac{1}{1 - 2^{1-z}}
+									\sum_{i = 1}^{\infty} \frac{(-1)^{n+1}}{n^z}$
+								</dd>
+							    <dd>
+							        Wygenerowane liczby zapisz w pliku <tt>.csv</tt> (w osobnych kolumnach części rzeczywiste i urojone).
+							        Następnie zrób w arkuszu kalkulacyjnym podwójny wykres dla danych wygenerowanych w taki sposób
+									(nałożone na siebie wykresy dla części rzeczywistych i urojonych).
+							    </dd>
+							    <dd>
+							        Z formatem pliku CSV można się zapoznać na przykład na Wikipedii:
+							        <br /> &nbsp; &nbsp; <em>https://pl.wikipedia.org/wiki/CSV_(format_pliku)</em>
+							        <br /> &nbsp; &nbsp; <em>https://en.wikipedia.org/wiki/Comma-separated_values</em>
+							    </dd>
+							</dl>
+						</div>
+
+                        <!--li><a href="#zad8" class="btn" data-toggle="collapse"><strong>9, 10 stycznia 2023: liczby zespolone</strong></a></li>
+						<div id="zad8" class="collapse">
+							<dl>
+								<dt>Zadanie 1 (2 pkt).</dt>
+								<dd>
+								    Zdefiniuj funkcję obliczającą wartość wielomianu zespolonego.
+									Współczynniki wielomianu umieść w kolekcji <tt>vector&lt;complex&lt;double&gt;&gt;</tt>.
+									Wykorzystaj do tego funkcję <tt>accumulate</tt> i labdę (z modyfikatorem <tt>mutable</tt>).
+							    </dd>
+								<dt>Zadanie 2 (3 pkt).</dt>
+								<dd>
+								    Zdefiniuj funkcje pracujące na liczbach zespolonych, które będą wyliczać wartość:
+							        <ol style="list-style-type: lower-alpha;">
+							            <li>funkcji gamma Eulera $\Gamma(z) = \frac{1}{z} \prod_{n=1}^{\infty}
+							                \frac{(1+\frac{1}{n})^z}{1+\frac{z}{n}}$</li>
+										<li>i odwrotności tej funkcji $\frac{1}{\Gamma(z)} = ze^{\gamma z} \prod_{n=1}^{\infty}
+										    \left(\left(1+\frac{z}{n}\right)e^{-\frac{z}{n}}\right)$.</li>
+									</ol>
+									Symbol $\gamma$ reprezentuje stałą Eulera-Mascheroniego wynoszącą około 0.5772156649.
+									Funkcje te mają liczyć wartość funkcji w zadanym punkcie zespolonym z określoną dokładnością
+									(liczba iteracji).
+								</dd>
+								<dt>Zadanie 3 (5 pkt).</dt>
+								<dd>
+								    Zdefiniuj funkcję pracującą na liczbach zespolonych, które będą wyliczać wartość
+									funkcji dzeta Riemanna $\zeta(z) = \sum_{n = 1}^{\infty} \left(\frac{1}{n}\right)^z$.
+									Szereg ten jest zbieżny dla takich $z$, których część rzeczywista jest $>1$.
+									Funkcja ta ma liczyć wartość funkcji w zadanym punkcie zespolonym z określoną dokładnością
+									(liczba iteracji).
+							    </dd>
+							    <dd>
+									Policz i stablicuj wartości tej funkcji na <em>prostej krytycznej</em> $\Re(z) = 0.5$
+									z hipotezy Riemanna (musisz użyć innego wzoru).
+							        Wygenerowane liczby zapisz w pliku <tt>.csv</tt> (w osobnych kolumnach części rzeczywiste i urojone).
+							        Następnie zrób w arkuszu kalkulacyjnym podwójny wykres dla danych wygenerowanych w taki sposób
+									(nałożone na siebie wykresy dla części rzeczywistych i urojonych).
+							    </dd>
+							    <dd>
+							        Z formatem pliku CSV można się zapoznać na przykład na Wikipedii:
+							        <br /> &nbsp; &nbsp; <em>https://pl.wikipedia.org/wiki/CSV_(format_pliku)</em>
+							        <br /> &nbsp; &nbsp; <em>https://en.wikipedia.org/wiki/Comma-separated_values</em>
+							    </dd>
+							</dl>
+						</div-->
+
+                        <li><a href="#zad8" class="btn" data-toggle="collapse"><strong>13, 14 grudnia 2023: wyrażenia regularne</strong></a></li>
+						<div id="zad8" class="collapse">
+							<dl>
+								<dt>Zadanie 1 (1 pkt).</dt>
+								<dd>
+								    Zdefiniuj wyrażenie regularne do rozpoznawania prawidłowo zapisanej godziny.
+								    Zapis godziny to liczba godzin (0-23) i liczba minut (0-59) oddzielone dwukropkiem
+								    (obydwie liczby zapisane za pomoca dwóch cyfr); opcjonalnie w godzinie mogą sie pojawić sekundy (0-59).
+								</dd>
+								<dd>
+									Przykłady prawidłowo zapisanych godzin:
+									<tt>14:17</tt>, <tt>09:15</tt>, <tt>23:37:08</tt>.
+									<br />
+									Przykłady wadliwie zapisanych godzin:
+									<tt>14.16</tt> (kropka zamiast dwukropka),
+									<tt>19:5</tt> (minuty zapisane jedną cyfrą),
+									<tt>21:32:07,10</tt> (zbyt duża dokładność).
+								</dd>
+								<dd>
+								    Przetestuj wyrażenie na danych wprowadzonych ze standardowego wejścia.
+								</dd>
+								<dt>Zadanie 2 (2 pkt).</dt>
+								<dd>
+								    Zdefiniuj wyrażenie regularne do rozpoznawania prawidłowo zapisanej daty.
+								    Zapis daty składa się z numeru dnia w miesiącu (1-31), numeru miesiąca(1-12) i roku;
+								    liczby te mają być od siebie oddzielone minusem (numer dnia i miesiąca zapisane za pomoca
+								    dwóch cyfr a rok za pomocą czterech).
+								    Zadbaj o sprawdzanie górnych ograniczeń na liczbę dni w poszczególnych miesiącach
+								    (nie musisz sprawdzać przestępności roku, chociaż byłoby to ciekawe wyzwanie - można założyć, że luty ma 28 dni).
+								</dd>
+								<dd>
+									Przykłady prawidłowo zapisanych dat:
+									<tt>15-09-1999</tt>, <tt>05-12-2018</tt>, <tt>28-02-2021</tt>.
+									<br />
+									Przykłady wadliwie zapisanych dat:
+									<tt>03/07/1917</tt> (ukośnik zamiast myślnika),
+									<tt>6-3-1945</tt> (dni i miesiące zapisane jedną cyfrą),
+									<tt>29-02-2022</tt> (liczba dni w miesiącu lutym przekracza 28).
+								</dd>
+								<dd>
+								    Przetestuj wyrażenie na danych wprowadzonych ze standardowego wejścia.
+								</dd>
+								<dt>Zadanie 3 (2 pkt).</dt>
+								<dd>
+								    Zdefiniuj wyrażenie regularne do rozpoznawania prawidłowo zapisanej nazwy miejscowości
+									w Polsce (nie używaj polskich naków diakrytycznych, tylko podobnych liter w alfabecie angielskim,
+									na przykład zamiast litery <tt>ż</tt> użyj litery <tt>z</tt>).
+								    Zapis nazwy miejscowości to ciąg słów, gdzie każde słowo rozpoczyna się z dużej litery.
+								    Poszczególne słowa mogą być odseparowane dowolną liczbą białych znaków.
+									W nazwach miejscowości zdarzają się też połączenia słów za pomocą myślnika (w okolicach
+									łącznika nie występują białe znaki).
+								</dd>
+								<dd>
+									Przykłady prawidłowo zapisanych nazw miejscowości:
+									<tt>Wroclaw</tt>, <tt>Bielsko-Biala</tt>, <tt>Tarnowskie Gory</tt>.
+									<br />
+									Przykłady wadliwie zapisanych nazw miejscowości:
+									<tt>WARSZAWA</tt> (cała nazwa zapisana dużymi literami),
+									<tt>Zle mieso</tt> (druga część nazwy z małej litery),
+									<tt>Zimna-Wodka-07</tt> (trzecia część nazwy zawiera cyfry).
+								</dd>
+								<dd>
+								    Przetestuj wyrażenie na danych wprowadzonych ze standardowego wejścia.
+								</dd>
+								<dt>Zadanie 4 (2 pkt).</dt>
+								<dd>
+								    Zdefiniuj wyrażenie regularne do rozpoznawania prawidłowo zapisanej liczby zespolonej.
+								    Zapis liczby zespolonej składa się z dwóch liczb rzeczywistych (z opcjonalna możliwością
+									wystąpienia części ułamkowej po kropce dziesiętnej) połączonych znakiem plusa albo minusa
+									(w pierwszej liczbie opcjonalny znak minusa), przy czym druga liczba jest zakończona małą
+									albo dużą literą &quot;i&quot;; całość jest ujęta w nawiasy okrągłe.
+								</dd>
+								<dd>
+									Przykłady prawidłowo zapisanych liczb zespolonych:
+									<tt>(12+3I)</tt>, <tt>(7.4-0.5i)</tt>, <tt>(2+0.01i)</tt>.
+									<br />
+									Przykłady wadliwie zapisanych liczb zespolonych:
+									<tt>3+4I</tt> (brak nawiasów okrągłych),
+									<tt>(3,14-2,72i)</tt> (przecinek zamiast kropki dziesiętnej),
+									<tt>(5.7i)</tt> (brak części rzeczywistej).
+								</dd>
+								<dd>
+								    Przetestuj wyrażenie na danych wprowadzonych ze standardowego wejścia.
+								</dd>
+								<dt>Zadanie 5 (3 pkt).</dt>
+								<dd>
+									Zadefiniuj wyrażenie regularne wykrywające hiperłącze w dokumencie HTML
+									- chodzi o znacznik <code>&lt;a href=&quot;...&quot;&gt; ... &lt;/a&gt;</code>.
+									Następnie użyj tego wyrażenia do wypisania na standardowym wyjściu
+									wszystkich znalezionych w tekście hiperłączy (bez opakowania w postaci
+									znacznia <code>&lt;a&gt;</code> - sama treść atrybutu <code>href</code>).
+								</dd>
+								<dd>
+									Uwaga: atrybut <code>href</code> nie musi być pierwszym atrybutem w znaczniku <code>&lt;a&gt;</code>,
+									na przykład: <br /> <code>&lt;a class=&quot;kl&quot; href=&quot;https://ii.uni.wroc.pl/&quot;&gt;</code>.
+								</dd>
+								<dd>
+									Uwaga: znacznik <code>&lt;a&gt;</code> nie jest jedynym w HTML, który może posiadać atrybut <code>href</code>,
+									na przykład: <br /> <code>&lt;link rel=&quot;shortcut icon&quot; href=&quot;logo.svg&quot; /&gt;</code>.
+								</dd>
+								<dd>
+								    Przetestuj wyrażenie na tekście ze wskazanych za pomocą argumentów wywołania programu
+									plików typu HTML (html, php, itp.).
+								</dd>
+							</dl>
+						</div>
+
+<!--
+                        <li><a href="#zadA" class="btn" data-toggle="collapse"><strong>23, 24 stycznia 2023: iteratory strumieniowe i plikowe</strong></a></li>
+						<div id="zadA" class="collapse">
+							<dl>
+								<dt>Zadanie 1 (2 pkt).</dt>
+								<dd>
+								    Odczytaj ze standardowego wejścia ciąg liczb rzeczywistych pooddzielanych białymi znakami.
+									Używając iteratora strumieniowego <code>istream_iterator</code> odczytaj te liczby, zapisz
+									w wektorze a następnie policz średnią arytmetyczną i odchylenie standardowe dla tego zbioru
+									danych i wypisz wyniki na standardowym wyjściu z dokładnością do 3 miejsc po kropce dziesiętnej.
+								</dd>
+								<dt>Zadanie 2 (2 pkt).</dt>
+								<dd>
+									Niech $\Phi(n)$ oznacza funkcję Eulera (tocjent), która dla każdej dodatniej liczby naturalnej
+									zwraca liczbę liczb naturalnych nie większych od $n$ i względnie pierwszych z $n$.
+									Dla zadanej wartości $k$ stablicuj kolejne wartości tocjenta $\Phi(1), \Phi(2), \ldots, \Phi(k)$
+									a następnie zapisz je do pliku <code>phi.txt</code>, używając iteratora strumieninowego
+									<code>ostream_iterator</code> z separatorem w postaci średnika i spacji <code>&quot;; &quot;</code>.
+									Wartość $k$ przekaż do programu poprzez argumenty wywołania.
+								</dd>
+								<dt>Zadanie 3 (2 pkt).</dt>
+								<dd>
+									Napisz program, który sprawdzi czy w lokalnym systemie plików istnieją podane pliki lub foldery.
+									Jeśli tak, to wypisz ich najważniejsze parametry (ścieżka kanoniczna, data ostatniej modyfikacji,
+									rozmiar dla pliku itp.).
+									Nazwy plików i folderów przekaż do programu poprzez argumenty wywołania.
+								</dd>
+								<dt>Zadanie 4 (2 pkt).</dt>
+								<dd>
+									Napisz program, który wypisze zawartość wskazanego katalogu w lokalnym systemie plików.
+									Jeśli podany przez użytkownika katalog nie istnieje, to wypisz stosowną informację na standardowe
+									wyjście dla błędów.
+									Najpierw wypisz nazwę kanoniczną wskazanego katalogu a potem jego zawartość,
+									przy czym najpierw wypisz katalogi (w kolejności alfabetycznej) a potem pliki
+									(również w kolejności alfabetycznej).
+									Wypisując zawartość folderu posłuż się iteratorem  <code>directory_iterator</code>.
+									Nazwę katalogu pobierz ze standardowego wejścia.
+								</dd>
+								<dt>Zadanie 5 (2 pkt).</dt>
+								<dd>
+									Napisz program, który policzy i wypisze sumę rozmiarów wszystkich plików we wskazanym
+									katalogi i jego podkatalogach.
+									Jeśli podany przez użytkownika katalog nie istnieje, to wypisz stosowną informacjęna standardowe
+									wyjście dla błędów.
+									Analizując zawartość katalogu i podkatalogów posłuż się iteratorem
+									<code>recursive_directory_iterator</code>.
+									Nazwę katalogu pobierz ze standardowego wejścia.
+								</dd>
+							</dl>
+						</div>
+
+                        <li><a href="#zadB" class="btn" data-toggle="collapse"><strong>30, 31 stycznia 2023: lokalizacja</strong></a></li>
+						<div id="zadB" class="collapse">
+							<dl>
+								<dt>Zadanie 1 (2 pkt).</dt>
+								<dd>
+								    Zdefiniuj napis typu <code>wstring</code> zawierający wszystkie polskie znaki diakrytyczne
+									i wypisz go na standardowym wyjściu <code>wcout</code>.
+									Napis powinien być sensownym zdaniem w języku polskim!
+								</dd>
+								<dt>Zadanie 2 (3 pkt).</dt>
+								<dd>
+								    Wypisz w trzech różnych lokalizacjach następujące dane (kilka oznacza &gt;2):
+									<ul>
+										<li>kilka liczb całkowitych i zmiennopozycyjnych;</li>
+										<li>kilka wartości pieniężnych;</li>
+										<li>bieżącą datę i godzinę.</li>
+									</ul>
+								</dd>
+								<dt>Zadanie 3 (2 pkt).</dt>
+								<dd>
+								    Przekonwertuj plik tekstowy używający kodowania UTF-8 na Unicode.
+								</dd>
+								<dt>Zadanie 4 (3 pkt).</dt>
+								<dd>
+								    W wektorze <code>vector&lt;wstring&gt;</code> znajdują się nazwy różnych zwierząt i roślin
+									(wstaw do kontenera kilkanaście różnych nazw).
+									Posortuj je używając kolatora dla polskiej lokalizacji a potem wypisz na standardowe wyjście.
+								</dd>
+							</dl>
+						</div>
+
+						<li><a href="#zadC" class="btn" data-toggle="collapse"><strong>6, 7 lutego 2023: metaprogramowanie</strong></a></li>
+						<div id="zadC" class="collapse">
+							<dl>
+								<dt>Zadanie 1 (1 pkt).</dt>
+								<dd>
+								    Wykorzystując metaprogramowanie zdefiniuj szablon obiektu funkcyjnego,
+								    pozwalającego obliczyć na poziomie kompilacji <em>n</em>-tą liczbę Lucasa
+								    dla liczby naturalnej <em>n &ge; 0</em>.
+								    Funkcja powinna działać (w trakcie kompilacji) w liniowym czasie <em>O(n)</em>.
+								</dd>
+								<dt>Zadanie 2 (2 pkt).</dt>
+								<dd>
+								    Wykorzystując metaprogramowanie zdefiniuj szablon obiektu funkcyjnego,
+								    pozwalającego obliczyć na poziomie kompilacji współczynnik dwumianowy <em>(<sup>n</sup><sub>k</sub>)</em>
+								    dla liczb naturalnych <em>0 &le; k &le; n</em>.
+								    Funkcja powinna działać (w trakcie kompilacji) w liniowym czasie <em>O(n)</em>.
+								</dd>
+								<dt>Zadanie 3 (1 pkt).</dt>
+								<dd>
+								    Wykorzystując metaprogramowanie zdefiniuj szablon obiektu funkcyjnego,
+								    pozwalającego obliczyć na poziomie kompilacji największy wspólny dzielnik <em>NWD(a, b)</em>
+								    dla liczb naturalnych <em>a, b &ge; 1</em>
+								    dla naturalnych liczb <em>0 &le; k &le; n</em>.
+								    Funkcja powinna działać (w trakcie kompilacji) w logarytmicznym czasie <em>O(log a + log b)</em>.
+								</dd>
+								<dt>Zadanie 4 (2 pkt).</dt>
+								<dd>
+								    Wykorzystując metaprogramowanie zdefiniuj szablon funkcji liczącej iloczyn skalarny dwóch wektorów:
+									<br /><code>template&lt;size_t N&gt; double inner(double *x, double *y);</code><br />
+									Parametrem szablonu ma być dlugość mnożonych wektorów.
+									<br />
+								    Zmodyfikuj poprzedni szablon funkcji liczącej iloczyn skalarny w taki sposób,
+									aby drugim parametrem był typ danych:
+									<br /><code>template&lt;size_t N, typename T = double&gt; T inner(T *x, T *y);</code>
+								</dd>
+								<dt>Zadanie 5 (4 pkt).</dt>
+								<dd>
+								    Wykorzystując metaprogramowanie zdefiniuj szablon klasy będącej opakowanien dla obiektu
+									określonego w parametrze typu <code>template&lt;typename T&gt; struct obj_holder</code>.
+									Opakowanie to ma konieczne zaalokować pamięć dla obiektu na stosie, jeśli
+									jest on mały (jego rozmiar jest niewięszy niż <code>sizeof(string)</code>) i nie jest tablicą
+									albo na stercie w przeciwnym przypadku.
+									<br />
+									W strukturze <code>obj_holder</code> zdefiniuj alias <code>type</code> dla docelowego typu
+									ustalony w oparciu o selektor <code>std::conditional&lt;&gt;</code> - będzie to albo
+									struktura <code>on_stack</code> (dla małych obiektów) albo <code>on_heap</code> (dla dużych
+									obiektów tworzonych dynamicznie na stercie, pamiętaj aby w destruktorze tego opakowania
+									zwolnić przydzieloną pamięć).
+									W obu tych strukturach zaimplementuj semantykę wskaźników, czyli operator wyłuskania
+									(gwiadka <code>*</code>) udostępniający referencję do obiektu i operator dostępu do składowych
+									(strzałka <code>-&gt;</code>) udostępniający adres obiektu.
+									<br />
+									W kolejnym kroku zdefiniuj szablon klasy będącej opakowanien dla tablicy obiektów
+									określonego w parametrze typu <code>template&lt;typename T&gt; struct arr_holder</code>.
+									Zaadoptuj poprzednie definicje na przypadek dotyczący tablic - struktura <code>array_on_heap</code>
+									dla małych tablic tworzonych na stercie i albo <code>array_in_file</code> dla dużych tablic
+									przechowywanych w plikach o dostępie swobodnym (pojęcie &quot;mały&quot; i &quot;duży&quot;
+									w odniesieniu do tablic należy rozsądnie doprecyzować).
+									W obu tych strukturach zaimplementuj semantykę indeksowania.
+								</dd>
+							</dl>
+						</div>
+
+						<li><a href="#zadD" class="btn" data-toggle="collapse"><strong>20, 21 stycznia 2021: programowanie współbieżne</strong></a></li>
+						<div id="zadD" class="collapse">
+							<dl>
+								<dt>Zadanie 1 (1 pkt).</dt>
+								<dd>
+									Napisz program, który utworzy kilka wątków nadając im arbitralnie pewne nazwy.
+									Każdy wątek ma wypisywać swoją nazwę na standardowym wyjściu co losową ilość milisekund (od 500 do 1000).
+									Działanie programu powinno się zakończyć po minucie – decyzję o zakończeniu niech podejmie główny wątek programu.
+								</dd>
+								<dt>Zadanie 2 (2 pkt).</dt>
+								<dd>
+									Napisz program, który będzie się wykonywać dokładnie 10 sekund.
+									Na 5 sekund przed zakończeniem należy użytkownika poinformować, że program wkrótce się zakończy (za 5 sekund).
+									Podobną informację należy podać 3 sekundy przed końcem i 1 sekundę przezd końcem.
+								</dd>
+								<dt>Zadanie 3 (3 pkt).</dt>
+								<dd>
+									Zaimplementuj algorytm sortowania przez scalanie <em>merge_sort</em>albo sortowania przez podział
+									<em>quick_sort</em> (jedna metoda do wyboru) dla danych przechowywanych w tablicy.
+									Działanie algorytmu ma bazować na wątkach zamiast na rekurencji – każde wywołanie rekurencyjne
+									funkcji sortującej zastąp wątkiem pracującym na podtablicy (podziały danych kończą się na tablicach
+									jednoelementowych albo pustych).
+								</dd>
+								<dt>Zadanie 4 (4 pkt).</dt>
+								<dd>
+									Problem <em>producentów i konsumentów</em> to klasyczny problem synchronizacji wątków na współdzielonych zasobach.
+									W problemie występują dwa rodzaje wątków: producent i konsument.
+									Wątki te korzystają ze wspólnego zasobu jakim jest bufor dla produkowanych i konsumowanych produktów.
+									Zadaniem producenta jest wytworzenie produktu, umieszczenie go w buforze i rozpoczęcie pracy nad nowym.
+									Jednocześnie konsument ma pobrać produkt z bufora, skonsumować go i sięgnąć po następny.
+									Problemem jest taka synchronizacja wątków, żeby żaden producent nie mógł dodać nowego produktu
+									do pełnego bufora, ani żaden konsument nie mógł pobrać produktu z pustego bufora.
+									<br />
+									Rozwiązaniem tego problemu dla producenta jest uśpienie wątku producenta w momencie, gdy bufor jest pełny;
+									pierwszy konsument, który pobierze produkt z bufora budzi wątki producentów, aby któryś uzupełnił bufor.
+									W analogiczny sposób usypiany jest wątek konsumenta próbujący pobrać produkt z pustego bufora;
+									pierwszy producent, który wstawi produkt do bufora budzi wątki konsumentów, aby któryś opróżnił bufor.
+									<br />
+								    Napisz program, który zilustruje <em>problem producentów i konsumentów</em> z wykorzystaniem wątków i blokad.
+								</dd>
+							</dl>
+						</div>
+-->
+
+                    </ol>
+                    <h5>SKOS i ranking</h5>
+                    <ul>
+                        <li><a href="https://skos.ii.uni.wroc.pl/">SKOS</a> - (system komunikacji na odległość ze studentami) w IInf UWr</li>
+                        <li>Ranking częściowy do zajęć laboratoryjnych: <a href="rank/stl-lab-sr18.pdf">grupa środowa</a> i <a href="rank/stl-lab-cz16.pdf">grupa czwartkowa</a></li>
+                    </ul>
+                    <!--h5>Ranking</h5>
+                    <ul>
+                        <li>Prognozowane <a href="stl-prognozaocen.pdf">oceny</a> po wszystkich 12 listach zadań
+							- wspólne zestawienie dla wszystkich grup (poniedziałek 18, wtorek 16 i 18).</li>
+                        <li>Ostatnia szansa na poprawienie oceny na początku lutego.</li>
+                    </ul-->
+
+					<a name="wykl"></a><h2>wykłady</h2>
+                    <p><a href="#wykl1" class="btn" data-toggle="collapse"><strong>5 października 2023 r: nowe elementy języka w C++</strong></a></p>
+                    <div id="wykl1" class="collapse">
+                        <h6>organizacja zajęć</h6>
+                        <h6>nowe elementy języka C++ 11/14/17/20/23</h6>
+                        <ul>
+                            <li>trójznaki</li>
+                            <li>surowe łańcuchy znakowe</li>
+                            <li>pętla <em>for-each</em></li>
+                            <li>jednolita inicjalizacja</li>
+                            <li>stypizowane typy wyliczeniowe</li>
+                            <li>dedukcja typów za pomocą <code>auto</code> i <code>decltype</code></li>
+                            <li>instrukcje <em>if</em> i <em>switch-case</em> z częścią inicjalizującą zmienne lokalne dla tych instrukcji</li>
+                            <li>instrukcja <em>constexpr-if</em></li>
+                            <li>operatory porównań</li>
+                        </ul>
+                        <p>slajdy:
+							<br /><a href="slajdy/stl0organizacja.pdf">organizacja.pdf</a>
+							<br /><a href="slajdy/stl1nowe.pdf">nowe.pdf</a>
+						</p>
+						<p>dodatkowe materiały i artykuły:
+							<br /><a href="https://en.cppreference.com/w/cpp/language/history">History of C++</a> (en.cppreference.com)
+							<br /><a href="https://en.wikipedia.org/wiki/C%2B%2B#History">C++ | History</a> (en.wikipedia.org)
+							<br /><a href="https://unstop.com/blog/history-of-cpp">History Of C++ | Detailed Explanation (With Timeline Infographic)</a> (unstop.com)
+						</p>
+					</div>
+
+                    <p><a href="#wykl2" class="btn" data-toggle="collapse"><strong>12 października 2023 r: sprytne wskaźniki</strong></a></p>
+                    <div id="wykl2" class="collapse">
+                        <h6>sprytne wskaźniki</h6>
+                        <ul>
+                            <li>wskaźniki współdzielone <code>shared_ptr</code></li>
+                            <li>słabe wskaźniki <code>weak_ptr</code></li>
+                            <li>wskaźniki unikatowe <code>unique_ptr</code></li>
+                        </ul>
+                        <p>slajdy: <a href="slajdy/stl2wskazniki.pdf">wskazniki.pdf</a></p>
+ 						<p>dodatkowe materiały i artykuły:
+							<br /><a href="https://www.geeksforgeeks.org/smart-pointers-cpp/">Smart Pointers in C++</a> (www.geeksforgeeks.org)
+							<br /><a href="https://cpp-polska.pl/post/kompendium-wiedzy-o-smart-pointerach">Kompendium wiedzy o smart pointerach</a> (cpp-polska.pl)
+							<br /><a href="https://infotraining.bitbucket.io/cpp-11/smart-ptr.html">Inteligentne wskaźniki - Smart Pointers</a> (unstop.com)
+						</p>
+                   </div>
+
+                    <p><a href="#wykl3" class="btn" data-toggle="collapse"><strong>19 października 2023 r: czasomierze</strong></a></p>
+                    <div id="wykl3" class="collapse">
+                        <h6>zegary</h6>
+                        <ul>
+                            <li>limity liczbowe</li>
+                            <li>cechy typowe</li>
+                            <li>współczynniki ułamkowe <code>ratio</code></li>
+                            <li>zegary <code>clock</code>, punkty <code>time_point</code> i odcinki czasowe <code>duration</code></li>
+                            <li>czas w systemie POSIX</li>
+                        </ul>
+                        <p>slajdy: <a href="slajdy/stl3czasomierze.pdf">czasomierze.pdf</a></p>
+ 						<p>dodatkowe materiały i artykuły:
+							<br /><a href="https://www.embeddedhow.com/post/measure-elapsed-time-in-the-application-using-c-chrono-library">Measure elapsed time in the application using the C++ Chrono library</a> (www.embeddedhow.com)
+						</p>
+                    </div>
+
+                    <p><a href="#wykl4" class="btn" data-toggle="collapse"><strong>26 października 2023 r: funktory</strong></a></p>
+                    <div id="wykl4" class="collapse">
+                        <h6>funktory</h6>
+                        <ul>
+                            <li>obiekty funkcyjne</li>
+                            <li>lambdy</li>
+                        </ul>
+                        <p>slajdy: <a href="slajdy/stl4funktory.pdf">funktory.pdf</a></p>
+ 						<p>dodatkowe materiały i artykuły:
+							<br /><a href="https://blog.feabhas.com/2014/03/demystifying-c-lambdas/">Demystifying C++ lambdas</a> (blog.feabhas.com) Glennan Carnie, 2014
+							<br /><a href="https://www.cppstories.com/2019/02/lambdas-story-part1/">Lambdas: from C++11 to C++20, Part 1</a> (www.cppstories.com) Bartłomiej Filipek, 2019
+							<br /><a href="https://www.cppstories.com/2019/03/lambdas-story-part2/">Lambdas: from C++11 to C++20, Part 2</a> (www.cppstories.com) Bartłomiej Filipek, 2019
+
+							<br /><a href="https://binarnie.pl/wyrazenia-lambda-c/">Wyrażenia lambda C++</a> (binarnie.pl) Łukasz Kosiński, 2018
+							<br /><a href="https://cpp-polska.pl/post/historia-wyrazen-lambda-od-c03-do-c20-czesc-i">Historia Wyrażeń Lambda: od C++03 do C++20, część I</a> (cpp-polska.pl) Bartłomiej Filipek, 2019
+							<br /><a href="https://cpp-polska.pl/post/historia-wyrazen-lambda-od-c03-do-c20-czesc-ii">Historia Wyrażeń Lambda: od C++03 do C++20, część II</a> (cpp-polska.pl) Bartłomiej Filipek, 2019
+
+							<br /><a href="https://strefainzyniera.pl/artykul/972/wyrazenia-lambda">Wyrażenia lambda</a> (strefainzyniera.pl)
+							<br /><a href="https://infotraining.bitbucket.io/cpp-11/lambda-expressions.html">Wyrażenia lambda</a> (infotraining.bitbucket.io)
+							<br /><a href="https://cpp0x.pl/kursy/Kurs-C++/Poziom-5/Wyrazenia-lambda-C++11/591">Wyrażenia lambda C++11</a> (cpp0x.pl)
+						</p>
+                    </div>
+
+                    <p><a href="#wykl5" class="btn" data-toggle="collapse"><strong>9 listopada 2023 r: kolekcje standardowe</strong></a></p>
+                    <div id="wykl5" class="collapse">
+                        <h6>kolekcje standardowe</h6>
+                        <ul>
+                            <li>wartościowa semantyka kolekcji</li>
+                            <li>elementy kolekcji</li>
+                            <li>rodzaje kolekcji i ich implementacja</li>
+                            <li>tablice</li>
+                            <li>wektory i deki</li>
+                            <li>listy dwukierunkowe i jednokierunkowe</li>
+                            <li>zbiory i multizbiory</li>
+                            <li>mapy i multimapy</li>
+                            <li>zbiory i mapy nieuporządkowane</li>
+                            <li>adaptatory kolekcji</li>
+                        </ul>
+                        <p>slajdy: <a href="slajdy/stl5kolekcje.pdf">kolekcje.pdf</a></p>
+ 						<p>dodatkowe materiały i artykuły:
+							<br /><a href="https://www.geeksforgeeks.org/containers-cpp-stl/">Containers in C++ STL</a> (www.geeksforgeeks.org)
+							<br /><a href="https://en.cppreference.com/w/cpp/container">Containers library</a> (en.cppreference.com)
+							<br /><a href="https://cplusplus.com/reference/stl/">Containers</a> (cplusplus.com)
+						</p>
+                    </div>
+
+                    <p><a href="#wykl6" class="btn" data-toggle="collapse"><strong>16 listopada 2023 r: iteratory i algorytmy</strong></a></p>
+                    <div id="wykl6" class="collapse">
+                        <h6>iteratory</h6>
+                        <ul>
+                            <li>klasyfikacja iteratorów</li>
+                            <li>iteratory wyjściowe i wejściowe</li>
+                            <li>iteratory postępujące i dwukierunkowe</li>
+                            <li>iteratory dostępu swobodnego</li>
+                            <li>iteratory i zakresy danych</li>
+						    <li>iteratory strumieniowe</li>
+						</ul>
+                        <h6>algorytmy</h6>
+                        <ul>
+                            <li>klasyfikacja algorytmów</li>
+                            <li>iteratory i zakresy w algorytmach</li>
+                            <li>algorytm <code>for_each</code></li>
+                            <li>algorytmy niemodyfikujące:
+                                <ul>
+                                    <li>zliczanie elementów <code>count</code></li>
+                                    <li>wartość minimalna i maksymalna <code>min_element</code>, <code>max_element</code>, <code>minmax_element</code></li>
+                                    <li>wyszukiwanie pierwszego pasującego elementu <code>find</code></li>
+                                    <li>wyszukiwanie pierwszego podzakresu <code>search</code></li>
+                                    <li>porównywanie zakresów <code>equal</code></li>
+                                    <li>wykrywanie sekwencji tych samych elementów w innym porządku <code>is_permutation</code></li>
+                                    <li>porównywanie leksykograficzne <code>lexicographical_compare</code></li>
+                                    <li>sprawdzanie czy zakres jest uporządkowany <code>is_sorted</code>, <code>is_sorted_until</code></li>
+                                    <li>sprawdzanie rozdzielenia elementów <code>is_partitioned</code>, <code>partition_point</code></li>
+                                    <li>sprawdzanie czy zakres jest kopcem <code>is_heap</code>, <code>is_heap_until</code></li>
+                                    <li>wszystkie <code>all_of</code>, którykolwiek <code>any_of</code>, żaden <code>none_of</code></li>
+                                </ul>
+                            </li>
+                            <li>algorytmy modyfikujące:
+                                <ul>
+                                    <li>kopiowanie <code>copy</code>, <code>copy_backward</code></li>
+                                    <li>przenoszenie elementów między zakresami <code>move</code>, <code>move_backward</code></li>
+                                    <li>przekształcanie elementów <code>transform</code></li>
+                                    <li>wymienianie elementów <code>swap_ranges</code></li>
+                                    <li>przypisywanie tej samej wartości <code>fill</code></li>
+                                    <li>przypisywanie wartości generowanych <code>generate</code></li>
+                                    <li>zastępowanie wartości wewnątrz zakresu<code>replace</code>, <code>replace_copy</code></li>
+                                </ul>
+                            </li>
+                            <li>algorytmy usuwające:
+                                <ul>
+                                    <li>usuwanie elementów z zakresu <code>remove</code>, <code>remove_copy</code></li>
+                                    <li>usuwanie kolejnych powtórzeń <code>unique</code>, <code>unique_copy</code></li>
+                                </ul>
+                            </li>
+                            <li>algorytmy mutujące:
+                                <ul>
+                                    <li>odwracanie kolejności elementów <code>reverse</code>, <code>reverse_copy</code></li>
+                                    <li>przesunięcia cykliczne elementów <code>rotate</code>, <code>rotate_copy</code></li>
+                                    <li>permutacje elementów <code>next_permutation</code>, <code>prev_permutation</code></li>
+                                    <li>tasowanie elementów <code>random</code>, <code>random_shuffle</code></li>
+                                    <li>rozdzielenie elementów <code>partition</code>, <code>stable_partition</code>, <code>partition_copy</code></li>
+                                </ul>
+                            </li>
+                            <li>algorytmy sortujące:
+                                <ul>
+                                    <li>sortowanie elementów <code>sort</code>, <code>stable_sort</code></li>
+                                    <li>sortowanie częściowe <code>partial_sort</code>, <code>partial_sort_copy</code></li>
+                                    <li>wybór n-tego co do wielkości elementu <code>nth_element</code></li>
+                                </ul>
+                            </li>
+                            <li>algorytmy sortujące:
+                                <ul>
+                                    <li>sortowanie elementów <code>sort</code>, <code>stable_sort</code></li>
+                                    <li>sortowanie częściowe <code>partial_sort</code>, <code>partial_sort_copy</code></li>
+                                    <li>wybór n-tego co do wielkości elementu <code>nth_element</code></li>
+                                </ul>
+                            </li>
+                            <li>algorytmy kopcowe
+                                <ul>
+                                    <li>utworzenie kopca <code>make_heap</code></li>
+                                    <li>wstawienie elementu do kopca <code>push_heap</code></li>
+                                    <li>przesunięcie elementu największego na koniec kopca <code>pop_heap</code></li>
+                                    <li>sortowanie kopcowe <code>sort_heap</code></li>
+                                </ul>
+                            </li>
+                            <li>algorytmy przeznaczone dla zakresów posortowanych
+                                <ul>
+                                    <li>sprawdzanie obecności elementu <code>binary_search</code></li>
+                                    <li>wyszukiwanie pierwszej lub ostatniej możliwej pozycji <code>lower_bound</code>, <code>upper_bound</code></li>
+                                    <li>scalanie elementów <code>merge</code>, <code>inplace_merge</code></li>
+                                    <li>wyznaczanie sumy dwóch posortowanych zbiorów <code>set_union</code></li>
+                                    <li>wyznaczanie iloczynu dwóch posortowanych zbiorów <code>set_intersection</code></li>
+                                    <li>wyznaczanie różnicy dwóch posortowanych zbiorów <code>set_difference</code>, <code>set_symmetric_difference</code></li>
+                                </ul>
+                            </li>
+                            <li>algorytmy numeryczne
+                                <ul>
+                                    <li>iterowanie i kumulowanie obliczeń <code>accumulate</code></li>
+                                    <li>iloczynu skalarny <code>inner_product</code></li>
+                                    <li>sumy częściowe <code>partial_sum</code></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>slajdy:
+							<a href="slajdy/stl6iteratory.pdf">iteratory.pdf</a>,
+							<a href="slajdy/stl6algorytmy.pdf">algorytmy.pdf</a>
+						</p>
+                    </div>
+
+                    <p><a href="#wykl7" class="btn" data-toggle="collapse"><strong>23 listopada 2023 r: komponenty numeryczne</strong></a></p>
+                    <div id="wykl7" class="collapse">
+                        <h6>komponenty numeryczne</h6>
+                        <ul>
+                            <li>globalne funkcje numeryczne</li>
+                            <li>liczby zespolone</li>
+                            <li>algorytmy numeryczne</li>
+                            <li>mechanizmy losowości i rozkłady</li>
+                            <li>tablice wartości numerycznych</li>
+                        </ul>
+                        <p>slajdy: <a href="slajdy/stl7numeryczne.pdf">numeryczne.pdf</a></p>
+                    </div>
+
+                    <!--p><a href="#wykl8" class="btn" data-toggle="collapse"><strong>20 grudnia 2022 r: liczby zespolone</strong></a></p>
+                    <div id="wykl8" class="collapse">
+                        <h6>liczby zespolone</h6>
+                        <ul>
+                            <li>szablon klasy <code>complex&lt;&gt;</code></li>
+                            <li>funkcje i operatory działające na liczbach zespolonych</li>
+                        </ul>
+                        <p>slajdy: <a href="slajdy/stl8zespolone.pdf">zespolone.pdf</a></p>
+                    </div-->
+
+                    <p><a href="#wykl8" class="btn" data-toggle="collapse"><strong>7 grudnia 2023 r: wyrażenia regularne</strong></a></p>
+                    <div id="wykl8" class="collapse">
+                        <h6>wyrażenia regularne</h6>
+                        <ul>
+                            <li>budowa wyrażeń regularnych</li>
+                            <li>klasa <code>regex</code></li>
+                            <li>funkcje dopasowujące</li>
+                            <li>podwyrażenia</li>
+                            <li>iterowanie po dopasowaniach</li>
+                        </ul>
+                        <p>slajdy: <a href="slajdy/stl8regularne.pdf">regularne.pdf</a></p>
+                    </div>
+
+                    <p><a href="#wykl9" class="btn" data-toggle="collapse"><strong>14 grudnia 2023 r: lokalny system plików</strong></a></p>
+<!--
+                    <div id="wykl9" class="collapse">
+                        <h6>iteratory strumieniowe i plikowe</h6>
+                        <ul>
+                            <li>iterator strumieniowy wejściowy <code>istream_iterator</code></li>
+                            <li>iterator strumieniowy wyjściowy <code>ostream_iterator</code></li>
+                            <li>klasa <code>std::filesystem::path</code> i funkcja <code>std::filesystem::exists()</code></li>
+                            <li>iteratory po systemie plików <code>directory_iterator</code> i <code>recursive_directory_iterator</code></li>
+                        </ul>
+                        <p>slajdy: <a href="slajdy/stlApliki.pdf">pliki.pdf</a></p>
+                    </div>
+
+                    <p><a href="#wyklB" class="btn" data-toggle="collapse"><strong>17 stycznia 2023 r: lokalizacja</strong></a></p>
+                    <div id="wyklB" class="collapse">
+                        <h6>zestawy znaków</h6>
+                        <ul>
+                            <li>kodowanie znaków</li>
+							<li>zestawy znaków obsługiwane w C++</li>
+							<li>literały napisowe</li>
+							<li>cechy znaków <code>char_traits</code></li>
+						</ul>
+                        <h6>lokalizacja</h6>
+                        <ul>
+							<li>obiekty ustawień lokalnych <code>locale</code></li>
+							<li>aspekty ustawień lokalnych <code>facet</code></li>
+							<li>formatowanie liczb, wartości pieniężnych, czasu i daty</li>
+                        	<li>klasyfikacja znaków</li>
+                        	<li>konwersja standardów kodowania znaków</li>
+                        	<li>sortowanie łańcuchów znakowych</li>
+                        </ul>
+                        <p>slajdy: <a href="slajdy/stlBlokalizacja.pdf">lokalizacja.pdf</a></p>
+                    </div>
+
+                    <p><a href="#wyklC" class="btn" data-toggle="collapse"><strong>24 stycznia 2023 r: metaprogramowanie</strong></a></p>
+                    <div id="wyklC" class="collapse">
+                        <h6>metaprogramowanie</h6>
+                        <ul>
+                            <li>przypadki użycia metaprogramowania</li>
+                            <li>funkcje typowe</li>
+                            <li>aliasy i predykaty typów</li>
+                            <li>trejty które wiążą typy z ich właściwościami</li>
+                            <li>struktury sterujące <code>Conditional</code> i <code>Select</code></li>
+                            <li>iteracja za pomocą szablonów rekurencyjnych</li>
+                            <li>definicja warunkowa <code>Enable_if</code></li>
+                        </ul>
+                        <p>slajdy: <a href="slajdy/stlCmeta.pdf">meta.pdf</a></p>
+                    </div>
+
+                    <p><a href="#wyklD" class="btn" data-toggle="collapse"><strong>31 stycznia 2023 r: współbieżność wysokopoziomowa</strong></a></p>
+                    <div id="wyklD" class="collapse">
+                        <h6>współbieżność wysokopoziomowa</h6>
+                        <ul>
+                            <li>wątki w procesie jako niezależne ścieżki obliczeń</li>
+                            <li>wątki sprzętowe, systemowe i programowe <code>thread</code></li>
+                            <li>asynchroniczne wykonywanie zadań za pomocą funkcji <code>async()</code></li>
+                            <li>strategie wykonywania zadań przez funkcję <code>async()</code>: <code>launch::async</code> i <code>launch::deferred</code></li>
+                            <li>klasy reprezentujące wynik działania funkcji zrealizowanej przez wątek <code>future&lt;&gt;</code> i <code>shared_future&lt;&gt;</code></li>
+                            <li>odbieranie wyniku od futury za pomocą funkcji <code>get()</code></li>
+						    <li>funkcja <code>get()</code> i <code>valid()</code> działająca na obiekcie futury</li>
+                            <li>oczekiwanie na zakończenie i wynik zadania w futurze za pomocą funkcji <code>wait_for()</code> i <code>wait_until()</code></li>
+                            <li>status futury: <code>future_status::deferred</code>, <code>future_status::timeout</code>, <code>future_status::ready</code></li>
+                            <li>obsługa wyjątków w trakcie pracy wątku</li>
+                            <li>futury współdzielone <code>shared_future&lt;&gt;</code></li>
+                            <li>wstrzymanie realizacji zadania za pomocą funkcji <code>yield()</code></li>
+                            <li>synchroniazacja pracy wątków za pomocą funkcji <code>join()</code></li>
+                            <li>usypianie wątków za pomocą funkcji <code>this_thread::sleep_for()</code></li>
+                        </ul>
+                        <p>slajdy: <a href="slajdy/stlDwspolbiezne.pdf">wspolbiezne.pdf</a></p>
+                    </div>
+-->
+<!--
+            <p><a href="#wyklE" class="btn" data-toggle="collapse"><strong>25 stycznia 2022 r: współbieżność wysokopoziomowa</strong></a></p>
+                    <div id="wyklE" class="collapse">
+                        <h6>współbieżność niskopoziomowa</h6>
+                        <ul>
+                            <li>klasa wątku <code>thread</code></li>
+                            <li>klasa promesy <code>promise</code></li>
+                            <li>problem synchronizacji</li>
+                            <li>muteksy i blokady</li>
+                            <li>zmienne warunkowe</li>
+                            <li>atomowe typy danych</li>
+                        </ul>
+                        <p>slajdy: <a href="slajdy/stlCwatki.pdf">watki.pdf</a></p>
+            </div>
+
+            <p><a href="#wyklF" class="btn" data-toggle="collapse"><strong>7 lutego 2023 r: folding</strong></a></p>
+                    <div id="wyklF" class="collapse">
+                        <h6>folding</h6>
+                        <ul>
+                            <li>szablony i funkcje wariadyczne</li>
+                            <li>wyrażenia fold</li>
+                            <li>folding lewostronny i prawostrony</li>
+                            <li>folding jednoargumetowy i dwuargumentowy</li>
+							<li>operatory w wyrażeniach fold</li>
+                            <li>operatory logiczne <tt>&amp;&amp;</tt> oraz <tt>||</tt> dostarczane wraz z wbudowanymi elementami neutralności</li>
+                            <li>operatory sekwencji obliczeń <tt>,</tt> (przecinek) dostarczany wraz z domyślnym wywołaniem funkcji <tt>void()</tt></li>
+                            <li>studium zadania - dopasowanie zakresu względem poszczególnych elementów:
+								<tt>
+									<br /> template &lt;typename R, typename ... Ts&gt;
+									<br /> auto matches(const R& range, Ts ... ts) {
+									<br /> &nbsp; &nbsp; return (count(begin(range), end(range), ts) + ...);
+									<br /> }
+								</tt>
+							</li>
+                            <li>studium zadania - sprawdzenie, czy operacja wstawienia wielu elementów do zbioru zakończyła się pomyślnie:
+								<tt>
+									<br /> template &lt;typename R, typename ... Ts&gt;
+									<br /> bool insert_all(T &amp;set, Ts ... ts) {
+									<br /> &nbsp; &nbsp; return (set.insert(ts).second &amp;&amp; ...);
+									<br /> }
+								</tt>
+							</li>
+                            <li>studium zadania - sprawdzenie, czy wszystkie parametry znajdują się w danym zakresie:
+								<tt>
+									<br /> template &lt;typename R, typename ... Ts&gt;
+									<br /> bool within(T min, T max, Ts ... ts) {
+									<br /> &nbsp; &nbsp; return ((min &lt;= ts &amp;&amp; ts &lt;= max) &amp;&amp; ...);
+									<br /> }
+								</tt>
+							</li>
+                            <li>studium zadania - umieszczenie wielu elementów w wektorze:
+								<tt>
+									<br /> template &lt;typename R, typename ... Ts&gt;
+									<br /> void insert_all(vector&lt;T&gt; &amp;vec, Ts ... ts) {
+									<br /> &nbsp; &nbsp; (vec.push_back(ts), ...);
+									<br /> }
+								</tt>
+							</li>
+                        </ul>
+                        <p>slajdy: <a href="slajdy/stlCwatki.pdf">watki.pdf</a></p>
+                    </div>
+
+                    <p><a href="#wykl8" class="btn" data-toggle="collapse"><strong>3 grudnia 2018 r: metaprogramowanie I</strong></a></p>
+                    <div id="wykl8" class="collapse">
+                        <p>idea metaprogramowania</p>
+                        <p>...</p>
+                        <p>slajdy: <a href="slajdy/stl8meta1.pdf">meta1.pdf</a></p>
+                    </div>
+                    <p><a href="#wykl9" class="btn" data-toggle="collapse"><strong>10 grudnia 2018 r: metaprogramowanie II</strong></a></p>
+                    <div id="wykl9" class="collapse">
+                        <p>funkcja typowa <code>Conditional</code></p>
+                        <p>funkcja typowa <code>Select</code></p>
+                        <p>iteracja za pomocą szalonów rekurencyjnych</p>
+                        <p>definicja warunkowa <code>Enable_if</code></p>
+                        <p>slajdy: <a href="slajdy/stl9meta2.pdf">meta2.pdf</a></p>
+                    </div>
+                    <p><a href="#wyklA" class="btn" data-toggle="collapse"><strong>17 grudnia 2018 r: lokalizacja I</strong></a></p>
+                    <div id="wyklA" class="collapse">
+                        <p>kodowanie znaków</p>
+                        <p>...</p>
+                    </div>
+                    <p><a href="#wyklB" class="btn" data-toggle="collapse"><strong>7 stycznia 2019 r: lokalizacja II</strong></a></p>
+                    <div id="wyklB" class="collapse">
+                        <p>kodowanie znaków</p>
+						<p>...</p>
+                        <p>klasa <code>locale</code></p>
+                        <p>aspekty <code>facet</code></p>
+                        <p>slajdy: <a href="slajdy/stlAlokalizacja1.pdf">lokalizacja1.pdf</a>, <a href="slajdy/stlBlokalizacja2.pdf">lokalizacja2.pdf</a></p>
+                    </div>
+                    <p><a href="#wyklC" class="btn" data-toggle="collapse"><strong>14 stycznia 2019 r: współbieżność I</strong></a></p>
+                    <div id="wyklC" class="collapse">
+                        <p>...</p>
+                        <p>slajdy: <a href="slajdy/stlCwatki.pdf">watki1.pdf</a></p>
+                    </div>
+                    <p><a href="#wyklD" class="btn" data-toggle="collapse"><strong>21 stycznia 2019 r: współbieżność II</strong></a></p>
+                    <div id="wyklD" class="collapse">
+                        <p>...</p>
+                        <p>slajdy: <a href="slajdy/stlDwatki.pdf">watki2.pdf</a></p>
+                        <p>artykuł: <a href="https://infotraining.bitbucket.io/cpp-thd/index.html">Programowanie wielowątkowe w C++</a>
+            </div>
+-->
+                </div>
+            </div>
+        </div>
+
+        <!-- **************** stopka **************** -->
+        <footer class="container-fluid text-center">
+            <p>
+            	październik 2023
+                <span class="glyphicon glyphicon-copyright-mark"></span>
+                Paweł Rzechonek
+            </p>
+        </footer>
+    </body>
+</html>

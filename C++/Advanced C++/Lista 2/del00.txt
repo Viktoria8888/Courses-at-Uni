@@ -1,0 +1,3 @@
+EXAMPLE POINTER
+Shared_file1
+Shared_file2

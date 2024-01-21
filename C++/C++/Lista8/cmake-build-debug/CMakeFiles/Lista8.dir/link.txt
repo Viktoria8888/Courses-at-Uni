@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/Lista8.dir/main.cpp.o CMakeFiles/Lista8.dir/RationalNum.cpp.o -o Lista8 

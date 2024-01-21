@@ -1,0 +1,3 @@
+/home/viktoria/Documents/Drugi semestr/Cpp/Lista 10/Zadanie 1/cmake-build-debug/CMakeFiles/Zadanie_1.dir
+/home/viktoria/Documents/Drugi semestr/Cpp/Lista 10/Zadanie 1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/viktoria/Documents/Drugi semestr/Cpp/Lista 10/Zadanie 1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
