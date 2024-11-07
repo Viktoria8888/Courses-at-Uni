@@ -1,5 +1,7 @@
 open Logic
 
+
+
 type proof
 
 (** Tworzy pusty dowód podanego twierdzenia *)
