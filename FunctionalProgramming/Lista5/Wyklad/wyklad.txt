@@ -1,0 +1,137 @@
+4.11. wykład 5 
+
+typ unit - do skutków ubocznych 
+listy z leniwym gonem -> 
+
+...
+
+listy faktycznie leniwe
+ 
+type 'a seq = unit -> 'a node and 'a node = Nil | Cons of 'a * 'a seq
+
+Seq jest modułem zaimplementowanym już w bibliotece standardowej w ocamlu
+
+let rec nats_from n : int Seq.t = 
+	fun () -> Cons(n, nats_from (n+1));;
+	
+let rec filter (p: 'a -> bool) (xs : 'a Seq.t) : 'a Seq.t =
+	fun () -> match xs () with
+		| Nil -> Nil
+		| Cons(x, xs) when p x -> Cons( x, filter p xs)
+		| Cons(x, xs) -> filter p xs ();;
+		
+let rec for_all p xs = 
+	match xs with
+	| Nil -> true
+	| Cons(x, xs) -> P x && for_all p xs
+	
+let rec nth n xs = 
+	match n, xs with
+		|_, Nil -> failwith "nth"
+		|0, Cons(x, _) -> x
+		|_, Cons(_, xs) -> nth (n-1) xs
+
+let rec primes () =
+	let is_prime n = 
+		primes
+		|> take_while (fun p -> p*p <= n)
+		|> for_all (fun p-> n mod p <> 0)
+	in 
+	Cons(2, filter is_prime (nats_from 3)) 
+	
+Chcemy poprawić tę reprezentację list aby nie powtarzać obliczeń
+jest coś takiego jak moduł Lazy, typ lazy_t
+
+nt 10000 primes -> trochę się liczy
+
+let x = lazy (nth 10000 primes)
+x policzy się dopiero gdy wymusimy obliczenia- 
+Lazy.force x;;
+
+let (lazy y) = x;;
+
+do tego, żeby zmienna zawierała albo odroczone obliczenie (funkcję?) albo obliczoną wartość potrzebny jest MUTOWALNY STAN 
+
+ref : 'a -> 'a ref = <fun>
+(!) : 'a ref -> 'a = <fun>
+(:=) : 'a ref -> 'a -> unit = <fun>
+
+typ ref to rekord z jednym polem contenst, a w ocamlu pola rekordów mogą być mutowalne
+implementacja refa wygląda tak:
+	type 'a ref = {mutable contents : 'a}
+
+let ref x = {contents = x};;
+
+let (!) r = r.contents;;
+
+let (:=) r x = r.contents <- x;;
+
+---
+
+let a = [|1;2;3|]  - int array, dostęp do elementów w O(1), alokuje się na stercie, mutowalna???
+
+a.(1) - dostęp do 1szego elementu
+
+let tab = Hashtbl.create 32;;
+Hashtbl.add tab "a" true;;
+Hashtbl.add tab "b" false;;
+
+'a -> 'b  - typ polimorficzny
+'_weak1 -> '_weak2 - typ monomorficzny, po pierwszym wywołaniu funkcji weak1 i weak2 to będą jakieś określone typy danych
+
+---
+Spróbujmy samemu zdefiniować leniwość ze spamiętywaniem :)
+Either - albo, albo
+ref - mutowalne 
+
+type 'a mylazy = (unit ->'a, 'a) Either.t ref
+
+let from_fun f = ref(Either.Left f)
+
+let force x = 
+	match !x with
+	| Either.Right v -> v
+	| Either.Left f -> 
+		let v = f () in
+			x:= Right v; v
+			
+------------------ GADT ------------------
+
+Let rec print (x: 'a) : string =
+	;((( ni da się
+	
+	→
+type tp = 
+	|Unit
+	|Int
+	|Bool
+	|String
+	|Pair of tp*tp
+	|List of tp
+
+Let rec print tp (x: 'a) : string =
+	match tp with	
+	|Unit -> "()"
+	|Int -> string_of_int x ?? NIE
+	
+	→
+	
+type _ tp = 	
+	|Unit : unit tp
+	|Int : int tp
+	|Bool : bool tp
+	|String	: string tp
+	|Pair : 'a tp * 'b tp -> ('a * 'b) tp
+	|List : 'b tp -> 'b list tp
+
+	
+let rec print : type.a a tp -> a -> string =
+	fun tp x ->
+		match tp with
+		|Unit -> "()"
+		|Int -> string_of_int x  OK
+		|Bool -> string_of_bool x
+		|String -> "\" ^ String.escaped x ^ "\"
+		|Pair(tp1, tp2) -> "(" ^ (print tp1 (fst x)) ^ ") * (" ^ (print tp2 (snd x)) ^ ")" 
+		|List -> 
+		

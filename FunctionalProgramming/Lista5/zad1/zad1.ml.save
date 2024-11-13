@@ -1,0 +1,30 @@
+let rec fix f x = f (fix f) x
+
+let fib_f fib n =
+  if n <= 1 then n
+  else fib (n-1) + fib (n-2)
+
+let rec fix_with_limit n f x = if (n < 0) then failwith "recursion depth exceeded" else f (fix_with_limit (n-1) f) x
+
+let max_depth = 10000
+
+let fib1 = fix_with_limit 10 fib_f
+
+(* ;;fib1 20 *)
+(* problem: one hashtable is shared among all the invocations of fix_mem *)
+let tab = Hashtbl.create 50
+let rec fix_memo f x =
+  if Hashtbl.mem tab x then Hashtbl.find tab x else 
+    let v = f (fix f) x in
+    let _ = Hashtbl.add tab x v in
+    v
+let fib2 = fix_memo fib_f
+
+let rec fix_memo1 f x =
+  let tab = Hashtbl.create 50 in   
+    let aux f x =
+	if Hashtbl.mem tab x then Hashtbl.find tab x else
+    	let v = f (aux f) x in
+    	let _ = Hashtbl.add tab x v in v
+let fib2 = fix_memo fib_f
+let fib3 = fix_memo1 fib_f 
