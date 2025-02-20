@@ -1,0 +1,52 @@
+module Sort
+
+interface DecLE a where
+  bot   : a
+  le    : a -> a -> Type
+  botLE : (x : a) -> le bot x
+  decLE : (x : a) -> (y : a) -> Either (le y x) (le x y)
+
+data BoundBy : DecLE a -> a -> List a -> Type where
+  BBNil  : BoundBy dle x []
+  BBCons : {dle : DecLE a} -> {x, y : a} ->
+    le x y -> BoundBy dle y ys -> BoundBy dle x (y :: ys) 
+
+Sorted : DecLE a -> List a -> Type
+Sorted dle xs = BoundBy dle bot xs
+
+data Perm : List a -> List a -> Type where
+  PermNil  : Perm [] []
+  PermCons : Perm xs ys -> Perm (x :: xs) (x :: ys)
+  PermSwap : Perm (x :: y :: zs) (y :: x :: zs)
+  PermComp : Perm xs ys -> Perm ys zs -> Perm xs zs
+
+permRefl : Perm xs xs
+permRefl {xs = []} = PermNil
+permRefl {xs = (x :: xs)} = PermCons permRefl
+
+total
+insert : {dle : DecLE a} -> (x : a) -> (ys : List a) ->
+  le b x -> BoundBy dle b ys ->
+  (zs : List a ** (BoundBy dle b zs, Perm (x :: ys) zs))
+insert x []        p1 p2 = ([x] ** (BBCons p1 BBNil, PermCons PermNil))
+insert x (y :: ys) p1 (BBCons p2 p3) with (decLE x y)
+  insert x (y :: ys) p1 (BBCons p2 p3) | (Left  p4) with (insert x ys p4 p3)
+    insert x (y :: ys) p1 (BBCons p2 p3) | (Left  p4) | (zs ** (p5, p6)) =
+      (y :: zs ** (lem1, lem2)) where
+        lem1 = BBCons p2 p5
+        lem2 = PermComp PermSwap (PermCons p6)
+  insert x (y :: ys) p1 (BBCons p2 p3) | (Right p4) =
+    (x :: y :: ys ** (lem1, lem2)) where
+      lem1 = BBCons p1 (BBCons p4 p3)
+      lem2 = permRefl
+
+total
+mysort : {dle : DecLE a} -> (xs : List a) ->
+  (ys : List a ** (Sorted dle ys, Perm xs ys))
+mysort []        = ([] ** (BBNil, PermNil))
+mysort {dle} (x :: xs) with (mysort {dle} xs)
+  mysort {dle} (x :: xs) | (ys ** (p1, p2)) with (insert x ys (botLE x) p1)
+    mysort {dle = dle} (x :: xs) | (ys ** (p1, p2)) | (zs ** (p3, p4)) =
+      (zs ** (lem1, lem2)) where
+        lem1 = p3
+        lem2 = PermComp (PermCons p2) p4

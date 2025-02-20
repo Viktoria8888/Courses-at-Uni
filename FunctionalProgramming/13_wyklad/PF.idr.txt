@@ -1,0 +1,48 @@
+module PF
+
+data Vec : Type -> Nat -> Type where
+  Nil  : Vec a Z
+  (::) : a -> Vec a n -> Vec a (S n)
+
+map : (a -> b) -> Vec a n -> Vec b n
+map f [] = []
+map f (x :: xs) = f x :: map f xs
+
+append : Vec a n -> Vec a m -> Vec a (n + m)
+append []        ys = ys
+append (x :: xs) ys = x :: append xs ys
+
+filter : (a -> Bool) -> Vec a n -> (m ** Vec a m)
+filter f []        = (0 ** [])
+filter f (x :: xs) with (f x)
+  filter f (x :: xs) | False = filter f xs
+  filter f (x :: xs) | True  with (filter f xs)
+    filter f (x :: xs) | True  | (m ** ys) = (S m ** x :: ys)
+
+-- Z + S m = S m
+-- (S Z) + m = S (Z + m) = S m
+
+data Eq : {a : Type} -> a -> a -> Type where
+  Refl : {x : a} -> Eq x x
+
+total
+lemma_plusZ : n + Z = n
+lemma_plusZ {n = Z}     = Refl
+lemma_plusZ {n = (S n)} = cong lemma_plusZ
+
+total
+lemma_plusS : n + S m = S n + m
+lemma_plusS {n = Z}     = Refl
+lemma_plusS {n = (S n)} = cong lemma_plusS
+
+total
+revApp : Vec a n -> Vec a m -> Vec a (n + m)
+revApp []        ys = ys
+revApp (x :: xs) ys = replace lemma_plusS (revApp xs (x :: ys))
+
+total
+reverse : Vec a n -> Vec a n
+reverse xs = replace lemma_plusZ (revApp xs [])
+
+foo : a -> b
+foo x = foo x

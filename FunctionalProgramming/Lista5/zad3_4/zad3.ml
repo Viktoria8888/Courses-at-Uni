@@ -21,16 +21,24 @@ let get_right = function Node(l,v,r) -> Lazy.force r | Leaf -> failwith "leaf"
 
 (* task 4 *)
 
-
-
-let rec tree_to_seq t = fun () ->  
+(* also works but less clear *)
+(* let rec tree_to_seq t = fun () ->  
 match t with
 | Leaf -> Seq.Nil
 | Node (l, v, r) -> 
   let left = fun () -> (tree_to_seq (Lazy.force l)) () in
   let right = fun () -> (tree_to_seq (Lazy.force r)) () in
     Seq.Cons(v, Seq.interleave left right)
-        
+         *)
+
+let rec tree_to_seq t = 
+match t with
+  | Leaf -> Seq.empty
+  | Node (l, v, r) -> 
+    let left = fun () -> (tree_to_seq (Lazy.force l)) () in
+    let right = fun () -> (tree_to_seq (Lazy.force r)) () in
+      fun () -> Seq.Cons(v, Seq.interleave left right)
+                 
 let s1 = tree_to_seq t;;
 (* 
 # #use "zad3.ml";;

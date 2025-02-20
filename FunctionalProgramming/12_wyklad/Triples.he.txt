@@ -1,0 +1,50 @@
+effect BT =
+  { flip : Unit => Bool
+  ; fail : Unit => a
+  }
+
+effect ST X =
+  { put : X => Unit
+  ; get : Unit => X
+  }
+
+let hState st c =
+  handle c () with
+  | return x => fn _ => x
+  | put st => fn _  => resume () st
+  | get () => fn st => resume st st
+  end st
+
+let rec select a b =
+  if a >= b then fail ()
+  elif flip () then a
+  else select (a+1) b
+
+let triples n =
+  let a = select 1 n in
+  let b = select a n in
+  let c = select b n in
+  if a*a + b*b <> c*c then fail();
+  printStr ("(" ++ stringOfInt a ++ ", " ++
+                   stringOfInt b ++ ", " ++
+                   stringOfInt c ++ ")\n");
+  put (get () + 1);
+  get ()
+
+let takeAll =
+  handle
+  | return x => [x]
+  | flip ()  => resume True @ resume False
+  | fail ()  => []
+  end
+
+let takeAny c =
+  handle c () with
+  | return x => Some x
+  | flip ()  =>
+    match resume True with
+    | Some v => Some v
+    | None   => resume False
+    end
+  | fail ()  => None
+  end

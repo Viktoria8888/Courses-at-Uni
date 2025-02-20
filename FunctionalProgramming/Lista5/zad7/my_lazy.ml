@@ -72,3 +72,10 @@ let rec primes () =
     |> for_all (fun p -> n mod p <> 0)
   in
   Cons(2, filter is_prime (nats_from 3)) *)
+
+
+let rec interleave s1 s2 = fun () -> match(s1 (), s2 ()) with
+  | (Seq.Nil, Seq.Cons(x, xs)) | (Seq.Cons(x, xs), Seq.Nil) -> Seq.Cons(x, xs)
+  | Seq.Nil, Seq.Nil -> Seq.Nil
+  | Seq.Cons(x, xs), Seq.Cons(y, ys) -> 
+    Seq.Cons(x, fun () -> Seq.Cons(y, (interleave xs ys)))

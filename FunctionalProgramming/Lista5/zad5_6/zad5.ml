@@ -46,7 +46,7 @@ let dll = of_list xs
 ;;assert((prev dll |> elem) = 5)
 ;;assert((dll == prev (next dll)) = true)
 
-і
+
 (* task 6 *)
 
 let rec left_from (node : int dllist) : int dllist = 
@@ -71,3 +71,7 @@ let integers : int dllist =
 ;; assert (elem (next (next (prev (prev integers)))) = 0)
 ;; assert (integers == (prev (next integers)))
 ;; assert (integers == (next (prev integers)))
+
+
+(* let interleave s1 s2 = match (s1, s2) with
+    (Seq.Cons(x, S)) *)
