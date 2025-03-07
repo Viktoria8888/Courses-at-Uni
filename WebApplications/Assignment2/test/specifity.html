@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        /* General style for all inputs */
+        input {
+            /* 0-0-1*/
+            border: 1px solid gray;
+            padding: 10px;
+        }
+
+
+        input:required {
+            /* 0-1-1*/
+            border-color: red;
+        }
+
+
+        [type="password"] {
+            /*0-1-0*/
+            border-color: yellow;
+            background-color: lightgray;
+        }
+
+
+        input:focus {
+            /* 0-1-1*/
+            border-color: blue;
+        }
+
+        /*1-1-1*/
+        #formContainer input:required {
+            background-color: yellow;
+        }
+
+        /*1-2-0*/
+
+        #formContainer [type="password"]:required {
+            background-color: lightgreen;
+        }
+    </style>
+
+    <link rel="stylesheet" href="style2.css" />
+</head>
+
+<body>
+    <div id="formContainer">
+        <input type="text" placeholder="Enter your name" />
+        <input type="password" required placeholder="Enter your password" />
+        <input type="email" placeholder="Enter your email" />
+    </div>
+
+</body>
+
+</html>

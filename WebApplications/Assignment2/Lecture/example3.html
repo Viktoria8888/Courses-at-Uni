@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .box {
+            /* 0-1-0 */
+            width: 100px;
+            height: 100px;
+        }
+
+        div#box {
+            /* 1-0-1 */
+            background-color: violet;
+        }
+
+        html body div#box.box {
+            /* 1-1-3 */
+            background-color: orange;
+        }
+
+        #box {
+            /* 1-0-0 */
+            background-color: green;
+        }
+
+        div {
+            /* 0-0-1 */
+            background-color: yellow;
+            color: black;
+        }
+
+        .box {
+            background-color: blue;
+        }
+
+        .box:hover {
+            background-color: yellow !important;
+            color: blue;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="box">Hello</div>
+    <div class="box">Hey</section>
+</body>
+
+</html>

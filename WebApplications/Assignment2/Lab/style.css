@@ -1,0 +1,97 @@
+html {
+    background-color: lightblue;
+    color: darkblue;
+    font-family: "Big Shoulders Stencil", Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+}
+
+html h1 {
+    font-weight: 800;
+    text-align: center;
+}
+
+html p {
+    margin: 1em;
+}
+
+#boxes div:nth-child(1) {
+    background-color: lightgreen;
+    border-radius: 50%
+}
+
+#boxes div:nth-child(1):hover {
+    background-color: lightpink;
+}
+
+#boxes div:nth-child(2) {
+    background-color: lightslategray;
+    border: 10px black solid;
+    box-sizing: border-box
+}
+
+#boxes div:nth-child(2):hover {
+    background-color: black;
+    border: 10px lightslategray solid;
+}
+
+#boxes div:nth-child(3) {
+    background-image: linear-gradient(0deg, red 50%, white 50%);
+}
+
+#boxes div:nth-child(3):hover {
+
+    background-image: linear-gradient(0deg, white 50%, red 50%);
+}
+
+
+#link1.food-link,
+#link2.food-link,
+#link3.food-link {
+    color: darkblue;
+    text-decoration: none;
+}
+
+#link1.food-link:visited,
+#link2.food-link:visited,
+#link3.food-link:visited {
+    color: lightslategray;
+}
+
+#link1.food-link:hover,
+#link2.food-link:hover,
+#link3.food-link:hover {
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+li::marker {
+    content: "🍔";
+
+}
+
+p:empty {
+    display: none;
+}
+
+input:disabled {
+    display: none;
+}
+
+a[href *="recipe"] {
+    display: none;
+}
+
+#challenge3 a {
+    display: inline;
+}
+
+#ariel img {
+    width: 70%;
+    min-width: 100px;
+    max-width: 500px;
+}
+
+#ariel figcaption {
+    font-size: 0.7rem;
+}
