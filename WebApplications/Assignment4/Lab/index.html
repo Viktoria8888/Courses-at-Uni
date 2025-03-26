@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Responsive Contact Form</title>
+	<style>
+		* {
+			box-sizing: border-box;
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			display: grid;
+			place-items: center;
+			height: 100vh;
+			width: 100vw;
+			background-color: #e2ade9;
+		}
+
+		.form__header {
+			text-align: center;
+			width: 100%;
+		}
+
+		.form {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 20px;
+			background: white;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+			width: 90%;
+			max-width: 600px;
+		}
+
+		.form__group {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.form__label {
+			margin-bottom: 5px;
+		}
+
+		.form__input,
+		.form__select,
+		.form__textarea {
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			width: 100%;
+		}
+
+
+		.form__group--full {
+			grid-column: span 2;
+		}
+
+		.form__button {
+			padding: 10px;
+			font-size: 1rem;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: 0.3s;
+			background-color: rgb(169, 42, 181);
+			color: white;
+			grid-column: span 2;
+		}
+
+		.form__button:hover {
+			background-color: darkgreen;
+		}
+
+
+		@media (max-width: 600px) {
+			.form {
+				grid-template-columns: 1fr;
+
+			}
+
+			.form__group {
+				grid-column: span 1;
+			}
+
+			.form__header {
+
+				grid-column: span 1;
+			}
+
+			.form__button {
+				grid-column: span 1;
+			}
+		}
+
+
+
+		.form__group--checkbox {
+			display: flex;
+			align-items: center;
+			flex-direction: row;
+			gap: 10px;
+
+
+		}
+
+		@media (pointer: fine) {
+			input[type="checkbox"] {
+				width: 15px;
+				height: 15px;
+				border-width: 1px;
+				border-color: blue;
+			}
+		}
+
+		@media (pointer: coarse) {
+			input[type="checkbox"] {
+				width: 30px;
+				height: 30px;
+				border-width: 2px;
+				border-color: red;
+			}
+		}
+
+
+		body {
+			font-family: Arial, sans-serif;
+			font-size: 3vw;
+			line-height: 1.5;
+			margin: 0;
+			padding: 0;
+		}
+
+		h1,
+		h2,
+		h3,
+		p {
+			font-size: clamp(1rem, 2vw, 2.5rem);
+
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			body {
+				font-size: 1rem;
+
+			}
+		}
+
+		.form__textarea {
+			width: 100%;
+
+			height: 150px;
+			resize: none;
+
+		}
+
+		.form__label--checkbox {
+			margin-bottom: 0;
+		}
+
+		textarea:invalid,
+		input:invalid {
+
+			border: none;
+			outline: 2px solid red;
+			border-radius: 5px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+
+		<form class="form">
+			<h2 class="form__header form__group--full">Contact Form</h2>
+			<div class="form__group">
+				<label class="form__label" for="name">First Name*</label>
+				<input class="form__input" type="text" id="name" name="name" required>
+			</div>
+			<div class="form__group">
+				<label class="form__label" for="surname">Last Name</label>
+				<input class="form__input" type="text" id="surname" name="surname">
+			</div>
+
+
+			<div class="form__group form__group--full">
+				<label class="form__label" for="email">Email*</label>
+				<input class="form__input" type="email" id="email" name="email" pattern="^[\w.]+@[\w]+\.com$" required>
+			</div>
+			<div class="form__group form__group--full">
+				<label class="form__label" for="phone">Phone</label>
+				<input class="form__input" type="text" id="phone" name="phone" pattern="[0-9]{9}" minlength="9"
+					maxlength="9">
+			</div>
+			<div class="form__group form__group--checkbox">
+				<label class="form__label form__label--checkbox">Subscribe to newsletter:</label>
+				<input type="checkbox" id="newsletter" name="newsletter">
+			</div>
+			<div class="form__group form__group--full">
+				<label class="form__label" for="contact_reason">Reason for Contact</label>
+				<select class="form__select" name="contact_reason" id="contact_reason">
+					<option value="no_reason">Select an option</option>
+					<option value="reason1">Reason1</option>
+					<option value="reason2">Reason2</option>
+				</select>
+			</div>
+			<div class="form__group form__group--full">
+				<label class="form__label" for="msg">Message*</label>
+				<textarea class="form__textarea" id="msg" name="msg" required></textarea>
+			</div>
+
+
+			<button class="form__button" type="submit">Submit</button>
+		</form>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+
+- 8.8.8.8 to publiczny serwer DNS Google, używany do testowania łączności internetowej
+- Przy pingowaniu z v0, otrzymujemy odpowiedź
+- Przy pingowaniu z v2, ping przechodzi przez v0, ale odpowiedź nie wraca do v2
+- Wireshark potwierdza, że odpowiedź przychodzi do v0, ale nie jest przekazywana dalej
+
+
+- v0 nie wie, że powinien przekazać odpowiedź z powrotem do v2
+- v2 ma tylko adres w sieci lokalnej (nie ma publicznego adresu IP)
+- Internet nie zna adresu sieci lokalnej, więc nie może bezpośrednio odpowiedzieć do v2
+
+1. v2 może łączyć się z internetem przez trasę: v2 → v1 → v0 → internet
+2. v0 musi działać jako router (source) dla pakietów wysyłanych od v2
+3. v0 musi znać trasę do v2 (to już zostało skonfigurowane)
+4. v1 musi wiedzieć, jak przekazywać pakiety (forwarding)
+
+
+Dodatkowo, konieczne jest skonfigurowanie NAT na v0, aby odpowiedzi z internetu były właściwie kierowane z powrotem do v2 przez v1.
+
+Konfigurowanie NAT (Network Address Translation) oznacza właśnie tworzenie mapowania między adresami IP z internetu a adresami IP lokalnymi.
+
+NAT działa następująco:
+
+1. Gdy pakiet wychodzi z sieci lokalnej (np. z v2 przez v1 do v0, a następnie do internetu), NAT na v0 zmienia adres źródłowy pakietu z lokalnego adresu IP maszyny v2 na adres publiczny maszyny v0.
+
+2. NAT zapisuje informację o tej translacji w swojej tabeli stanów (pamięta, że pakiet z określonego portu i adresu lokalnego został przetłumaczony na konkretny adres i port publiczny).
+
+3. Gdy odpowiedź przychodzi z internetu do v0, 
+NAT sprawdza swoją tabelę stanów i przekierowuje pakiet z powrotem do oryginalnego nadawcy w sieci lokalnej (v2), zmieniając adres docelowy z publicznego adresu v0 na lokalny adres v2.
