@@ -1,0 +1,5 @@
+entity Person
+{
+    name : String
+    age : int
+}
