@@ -10,14 +10,16 @@ import static org.junit.jupiter.api.Assertions.*;
 interface IBar {
     void doWork();
 }
+interface IFoo{
 
+}
 class Bar implements IBar {
     public void doWork() {
         System.out.println("Do work Bar");
     }
 }
 
-class Foo {
+class Foo implements IFoo {
 }
 interface IQux{
 
@@ -69,6 +71,29 @@ public class SimpleContainerTest {
         Bar bar = container.resolve(Bar.class);
         assertEquals(bar.getClass(),Bar.class);
 
+    }
+    @Test
+    void testResolveInstance(){
+        IFoo foo1 = new Foo();
+        container.registerInstance(IFoo.class,foo1);
+        IFoo foo2 = container.resolve(IFoo.class);
+        assertSame(foo1, foo2);
+
+    }
+    @Test
+    void testbuildUp(){
+        class NeedsBar {
+            @Inject
+            private IBar bar;
+
+            public IBar getBar() {
+                return bar;
+            }
+        }
+        NeedsBar needsBar = new NeedsBar();
+        container.registerTypeMap(IBar.class, Bar.class,false);
+        container.buildUp(needsBar);
+        assertEquals(needsBar.getBar().getClass(), Bar.class);
     }
 
 }
