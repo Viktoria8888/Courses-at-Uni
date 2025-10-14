@@ -1,3 +1,4 @@
+
 // Viktoriia Kashpruk 337014
 #include <arpa/inet.h>
 #include <errno.h>
@@ -344,7 +345,7 @@ int main(int argc, char *argv[])
 
         while (true)
         {
-            std::string request = recv_http_request(client_fd, 250);
+            std::string request = recv_http_request(client_fd, 10000);
             if (request.empty())
             {
                 close(client_fd);

@@ -47,7 +47,7 @@ public class DemoGuice extends AbstractModule {
         bind(IBar.class).to(Bar.class);
         bind(Bar.class).toInstance(new Bar()); // singleton domyślnie;
 
-        bind(FooSingleton.class).in(Reques);
+        bind(FooSingleton.class).in(Scopes.SINGLETON);
 
     }
 
